@@ -7,6 +7,8 @@ services:
       POSTGRES_DB: pizzeria
       POSTGRES_USER: pizzeria
       POSTGRES_PASSWORD: pizzeria
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_INITDB_ARGS: "--auth-host=trust"
     ports:
       - "5432:5432"
     volumes:

@@ -4,6 +4,28 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SERVICE_ROOT="$SCRIPT_DIR/.."
 
+# Check database status
+echo "=== PostgreSQL Database Status ==="
+cd "$SERVICE_ROOT"
+if [ -f docker-compose.yml ]; then
+    DB_STATUS=$(docker-compose ps -q postgres 2>/dev/null)
+    if [ -n "$DB_STATUS" ]; then
+        DB_RUNNING=$(docker inspect -f '{{.State.Running}}' $(docker-compose ps -q postgres) 2>/dev/null)
+        if [ "$DB_RUNNING" = "true" ]; then
+            echo "✓ Database is RUNNING"
+            echo "  Container: postgres"
+            echo "  Port: 5432"
+        else
+            echo "✗ Database container exists but is NOT running"
+        fi
+    else
+        echo "✗ Database is NOT running"
+    fi
+else
+    echo "⚠ docker-compose.yml not found"
+fi
+
+echo ""
 echo "=== Backend Server Status ==="
 
 # Check if Spring Boot process is running

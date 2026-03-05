@@ -24,3 +24,16 @@ pgrep -f "spring-boot:run" | while read pid; do
 done
 
 echo "Backend processes killed."
+
+# Stop PostgreSQL database
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR/.."
+
+echo ""
+echo "Stopping PostgreSQL database..."
+if [ -f docker-compose.yml ]; then
+    docker-compose down
+    echo "Database stopped."
+else
+    echo "Warning: docker-compose.yml not found, skipping database shutdown"
+fi
