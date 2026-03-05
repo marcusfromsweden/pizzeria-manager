@@ -1,0 +1,34 @@
+# Sub-repositories (managed separately)
+pizzeria-service/
+pizzeria-front-end/
+
+# Reference repositories (read-only, not managed)
+repos-for-reference/
+front-end-repos-for-reference/
+
+# Other project directories
+web/
+
+# Log files
+*.log
+
+# Editor/IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Claude
+.claude/
+
+# Environment files
+.env
+.env.local
+.env.*.local
