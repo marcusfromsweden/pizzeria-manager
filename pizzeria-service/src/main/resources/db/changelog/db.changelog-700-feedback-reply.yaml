@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 700-add-feedback-reply-columns
+      author: claude
+      changes:
+        - addColumn:
+            tableName: feedback
+            columns:
+              - column:
+                  name: admin_reply
+                  type: text
+              - column:
+                  name: admin_replied_at
+                  type: timestamp with time zone

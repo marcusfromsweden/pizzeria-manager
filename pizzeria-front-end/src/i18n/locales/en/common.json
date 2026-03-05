@@ -1,0 +1,183 @@
+{
+  "home": {
+    "features": {
+      "menu": {
+        "title": "Menu",
+        "description": "Explore our menu items and customisation options.",
+        "link": "View menu →"
+      },
+      "dietary": {
+        "title": "Dietary options",
+        "description": "Select your dietary preferences to find pizzas that work for you.",
+        "link": "Set preferences →"
+      },
+      "scores": {
+        "title": "Rate pizzas",
+        "description": "Share your feedback and rate your favorite pizzas.",
+        "link": "Rate now →"
+      },
+      "signInLink": "Sign in →"
+    },
+    "cta": {
+      "title": "Join us today!",
+      "description": "Create an account to save your preferences, rate pizzas, and more."
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "pizzas": "Pizzas",
+    "ingredients": "Ingredients",
+    "cart": "Cart",
+    "orders": "My Orders",
+    "scores": "Ratings",
+    "feedback": "Feedback",
+    "profile": "Profile",
+    "preferences": "Preferences",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "register": "Register",
+    "admin": "Admin",
+    "adminPrices": "Price Management",
+    "adminFeedback": "Customer Feedback"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "delete": "Delete",
+    "add": "Add",
+    "remove": "Remove",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "dismiss": "Dismiss"
+  },
+  "status": {
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "error": "An error occurred",
+    "success": "Success",
+    "notFound": "Not found",
+    "open": "Open",
+    "closed": "Closed"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordMaxLength": "Password must be at most 100 characters"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "sv": "Svenska"
+  },
+  "currency": {
+    "sek": "SEK"
+  },
+  "footer": {
+    "openingHours": "Opening hours",
+    "contact": "Contact",
+    "rights": "All rights reserved."
+  },
+  "contact": {
+    "phone": "Telephone"
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "error": {
+    "notFound": {
+      "message": "The page you're looking for doesn't exist or has been moved."
+    }
+  },
+  "pizzas": {
+    "empty": "No pizzas available"
+  },
+  "scores": {
+    "unknownPizza": "Unknown pizza"
+  },
+  "console": {
+    "title": "Console Logs",
+    "settings": "Console settings",
+    "captureSettings": "Console Capture",
+    "viewLogs": "View captured logs",
+    "noLogs": "No console logs yet",
+    "copyLatest": "Copy Latest",
+    "copied": "Copied!",
+    "clearAll": "Clear All",
+    "level": {
+      "error": "Errors",
+      "warn": "Warnings",
+      "info": "Info",
+      "debug": "Debug"
+    }
+  },
+  "admin": {
+    "noAccess": "You do not have admin access to this pizzeria.",
+    "prices": {
+      "title": "Price management",
+      "subtitle": "Export and import menu item and customization prices.",
+      "export": "Export prices",
+      "exportDescription": "Download a CSV file containing all current prices for menu items and customizations.",
+      "exporting": "Exporting...",
+      "downloadCsv": "Download CSV",
+      "import": "Import prices",
+      "importDescription": "Upload a CSV file to update prices. Use the dry-run option to preview changes before applying.",
+      "selectFile": "Select CSV file",
+      "dryRun": "Dry run (preview changes without applying)",
+      "importing": "Processing...",
+      "previewChanges": "Preview changes",
+      "applyChanges": "Apply changes",
+      "previewResults": "Preview results",
+      "importResults": "Import results",
+      "dryRunNote": "This is a preview. No changes have been applied yet.",
+      "total": "Total",
+      "updated": "Updated",
+      "unchanged": "Unchanged",
+      "errors": "Errors",
+      "type": "Type",
+      "name": "Name",
+      "regularPrice": "Regular",
+      "familyPrice": "Family",
+      "status": "Status",
+      "confirmApply": "Apply these changes",
+      "statusUpdated": "Updated",
+      "statusNoChange": "No change",
+      "statusNotFound": "Not found",
+      "typeMenuItem": "Menu item",
+      "typeExtra": "Extra"
+    },
+    "feedback": {
+      "title": "Customer feedback",
+      "subtitle": "View and respond to feedback submitted by your customers.",
+      "noAccess": "You do not have admin access to view customer feedback.",
+      "error": "Failed to load feedback.",
+      "date": "Date",
+      "message": "Message",
+      "category": "Category",
+      "rating": "Rating",
+      "status": "Status",
+      "statusReplied": "Replied",
+      "statusOpen": "Open",
+      "noFeedback": "No customer feedback yet.",
+      "expand": "Expand",
+      "fullMessage": "Full message",
+      "yourReply": "Your reply",
+      "writeReply": "Write a reply",
+      "replyPlaceholder": "Enter your reply to the customer...",
+      "replyRequired": "Please enter a reply message.",
+      "replyError": "Failed to send reply. Please try again.",
+      "cancel": "Cancel",
+      "sendReply": "Send reply"
+    }
+  }
+}

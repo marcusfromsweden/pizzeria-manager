@@ -1,0 +1,9 @@
+id,code,translation_key,sort_order
+37a07504-3fcb-4605-9630-d7240e0bc055,pizzas,translation.key.section.pizzas,1
+a55b28a1-bb1d-4f7e-bc88-dcb9bd5a3050,gyro_pizzas,translation.key.section.gyro_pizzas,2
+0432089a-9784-4e6d-8dfd-fbb58db4652d,gourmet_pizzas,translation.key.section.gourmet_pizzas,3
+bb74ae7f-79df-4a21-8364-82fce31add5e,enchilada,translation.key.section.enchilada,4
+9299e7e8-3433-4dc0-a5de-c0544d38d12d,gyros,translation.key.section.gyros,5
+6c3c606a-e144-4453-b74a-a3cf4c56fbeb,salads,translation.key.section.salads,6
+7e021455-2357-4bb6-b7a6-d2cd2cb3e8a2,pasta,translation.key.section.pasta,7
+ed83773d-34ff-46dc-8f55-611d1c4400b7,other,translation.key.section.other,8

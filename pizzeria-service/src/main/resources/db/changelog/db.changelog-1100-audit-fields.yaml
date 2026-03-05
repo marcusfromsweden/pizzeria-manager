@@ -1,0 +1,69 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1100-01
+      author: marcus
+      comment: "Add created_by and updated_by audit columns to users table"
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: created_by
+                  type: uuid
+              - column:
+                  name: updated_by
+                  type: uuid
+
+  - changeSet:
+      id: 1100-02
+      author: marcus
+      comment: "Add created_by and updated_by audit columns to feedback table"
+      changes:
+        - addColumn:
+            tableName: feedback
+            columns:
+              - column:
+                  name: created_by
+                  type: uuid
+              - column:
+                  name: updated_by
+                  type: uuid
+
+  - changeSet:
+      id: 1100-03
+      author: marcus
+      comment: "Add created_by audit column to pizza_scores table"
+      changes:
+        - addColumn:
+            tableName: pizza_scores
+            columns:
+              - column:
+                  name: created_by
+                  type: uuid
+
+  - changeSet:
+      id: 1100-04
+      author: marcus
+      comment: "Add created_by and updated_by audit columns to orders table"
+      changes:
+        - addColumn:
+            tableName: orders
+            columns:
+              - column:
+                  name: created_by
+                  type: uuid
+              - column:
+                  name: updated_by
+                  type: uuid
+
+  - changeSet:
+      id: 1100-05
+      author: marcus
+      comment: "Add created_by audit column to order_items table"
+      changes:
+        - addColumn:
+            tableName: order_items
+            columns:
+              - column:
+                  name: created_by
+                  type: uuid

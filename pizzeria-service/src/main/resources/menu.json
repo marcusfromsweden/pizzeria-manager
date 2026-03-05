@@ -1,0 +1,695 @@
+{
+  "pizzas": [
+    {
+      "dish_number": 1,
+      "name": "translation.key.disc.pizza.margarita",
+      "ingredients": [
+        "translation.key.ingredient.cheese"
+      ],
+      "price_in_sek": 100,
+      "family_size_price_in_sek": 250
+    },
+    {
+      "dish_number": 2,
+      "name": "translation.key.disc.pizza.fungi",
+      "ingredients": [
+        "translation.key.ingredient.mushrooms"
+      ],
+      "price_in_sek": 110,
+      "family_size_price_in_sek": 275
+    },
+    {
+      "dish_number": 3,
+      "name": "translation.key.disc.pizza.vesuvio",
+      "ingredients": [
+        "translation.key.ingredient.ham"
+      ],
+      "price_in_sek": 115,
+      "family_size_price_in_sek": 285
+    },
+    {
+      "dish_number": 4,
+      "name": "translation.key.disc.pizza.bombay",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.banana",
+        "translation.key.ingredient.curry"
+      ],
+      "price_in_sek": 115,
+      "family_size_price_in_sek": 285
+    },
+    {
+      "dish_number": 5,
+      "name": "translation.key.disc.pizza.hawaii",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.pineapple"
+      ],
+      "price_in_sek": 115,
+      "family_size_price_in_sek": 295
+    },
+    {
+      "dish_number": 6,
+      "name": "translation.key.disc.pizza.calzone",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.baked_in"
+      ],
+      "price_in_sek": 115,
+      "family_size_price_in_sek": 295
+    },
+    {
+      "dish_number": 7,
+      "name": "translation.key.disc.pizza.godfather",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.black_pepper"
+      ],
+      "price_in_sek": 115,
+      "family_size_price_in_sek": 295
+    },
+    {
+      "dish_number": 8,
+      "name": "translation.key.disc.pizza.capricciosa",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.mushrooms"
+      ],
+      "price_in_sek": 115,
+      "family_size_price_in_sek": 295
+    },
+    {
+      "dish_number": 9,
+      "name": "translation.key.disc.pizza.cacciatore",
+      "ingredients": [
+        "translation.key.ingredient.salami",
+        "translation.key.ingredient.feferoni"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 305
+    },
+    {
+      "dish_number": 10,
+      "name": "translation.key.disc.pizza.bomba",
+      "ingredients": [
+        "translation.key.ingredient.bacon",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.egg"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 305
+    },
+    {
+      "dish_number": 11,
+      "name": "translation.key.disc.pizza.pescatore",
+      "ingredients": [
+        "translation.key.ingredient.tuna",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.kalamata_olives"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 300
+    },
+    {
+      "dish_number": 12,
+      "name": "translation.key.disc.pizza.romana",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.shrimp"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 300
+    },
+    {
+      "dish_number": 13,
+      "name": "translation.key.disc.pizza.marinara",
+      "ingredients": [
+        "translation.key.ingredient.shrimp",
+        "translation.key.ingredient.mussels",
+        "translation.key.ingredient.tuna"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 300
+    },
+    {
+      "dish_number": 14,
+      "name": "translation.key.disc.pizza.siciliana",
+      "ingredients": [
+        "translation.key.ingredient.anchovies",
+        "translation.key.ingredient.capers",
+        "translation.key.ingredient.olives",
+        "translation.key.ingredient.garlic"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 300
+    },
+    {
+      "dish_number": 15,
+      "name": "translation.key.disc.pizza.maffia",
+      "ingredients": [
+        "translation.key.ingredient.bacon",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.shrimp"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 300
+    },
+    {
+      "dish_number": 16,
+      "name": "translation.key.disc.pizza.venezia",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.shrimp"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 17,
+      "name": "translation.key.disc.pizza.mamma_mia",
+      "ingredients": [
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.bacon",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.black_pepper"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 18,
+      "name": "translation.key.disc.pizza.perugina",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.artichoke"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 19,
+      "name": "translation.key.disc.pizza.cosa_nostra",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.bell_pepper",
+        "translation.key.ingredient.shrimp",
+        "translation.key.ingredient.black_pepper"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 20,
+      "name": "translation.key.disc.pizza.vegetariana",
+      "ingredients": [
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.olives",
+        "translation.key.ingredient.bell_pepper",
+        "translation.key.ingredient.tomatoes",
+        "translation.key.ingredient.artichoke"
+      ],
+      "price_in_sek": 120,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 21,
+      "name": "translation.key.disc.pizza.thessaloniki",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.shrimp",
+        "translation.key.ingredient.feta_cheese",
+        "translation.key.ingredient.black_pepper",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.tzatziki"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 22,
+      "name": "translation.key.disc.pizza.chicken_boat",
+      "ingredients": [
+        "translation.key.ingredient.chicken",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.bell_pepper",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.curry"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 23,
+      "name": "translation.key.disc.pizza.bolognese",
+      "ingredients": [
+        "translation.key.ingredient.homemade_minced_beef",
+        "translation.key.ingredient.red_onion"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 24,
+      "name": "translation.key.disc.pizza.ramona",
+      "ingredients": [
+        "translation.key.ingredient.taco_meat",
+        "translation.key.ingredient.corn",
+        "translation.key.ingredient.jalapeno",
+        "translation.key.ingredient.fresh_tomatoes",
+        "translation.key.ingredient.taco_sauce"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 25,
+      "name": "translation.key.disc.pizza.quattro_stagioni",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.shrimp",
+        "translation.key.ingredient.mussels",
+        "translation.key.ingredient.artichoke"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 26,
+      "name": "translation.key.disc.pizza.ricca",
+      "ingredients": [
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.shrimp",
+        "translation.key.ingredient.bell_pepper",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.bacon"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 27,
+      "name": "translation.key.disc.pizza.charlotte",
+      "ingredients": [
+        "translation.key.ingredient.tenderloin",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.fresh_tomatoes",
+        "translation.key.ingredient.bearnaise"
+      ],
+      "price_in_sek": 150
+    },
+    {
+      "dish_number": 28,
+      "name": "translation.key.disc.pizza.kebab",
+      "ingredients": [
+        "translation.key.ingredient.kebab_meat",
+        "translation.key.ingredient.fresh_tomatoes",
+        "translation.key.ingredient.iceberg_lettuce",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.tzatziki"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 29,
+      "name": "translation.key.disc.pizza.mexicana",
+      "ingredients": [
+        "translation.key.ingredient.homemade_minced_beef",
+        "translation.key.ingredient.bell_pepper",
+        "translation.key.ingredient.jalapeno"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 30,
+      "name": "translation.key.disc.pizza.pepperoni",
+      "ingredients": [
+        "translation.key.ingredient.pepperoni_sausage",
+        "translation.key.ingredient.fresh_tomatoes",
+        "translation.key.ingredient.jalapeno"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    }
+  ],
+  "gyro_pizzas": [
+    {
+      "dish_number": 31,
+      "name": "translation.key.disc.gyro_pizza.kingens",
+      "ingredients": [
+        "translation.key.ingredient.gyros_meat",
+        "translation.key.ingredient.feferoni",
+        "translation.key.ingredient.black_pepper",
+        "translation.key.ingredient.garlic",
+        "translation.key.ingredient.tzatziki"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 32,
+      "name": "translation.key.disc.gyro_pizza.peters_pizza",
+      "ingredients": [
+        "translation.key.ingredient.gyros_meat",
+        "translation.key.ingredient.ham",
+        "translation.key.ingredient.egg",
+        "translation.key.ingredient.garlic",
+        "translation.key.ingredient.black_pepper"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 33,
+      "name": "translation.key.disc.gyro_pizza.foreningsgatan",
+      "ingredients": [
+        "translation.key.ingredient.gyros_meat",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.bacon",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.olives"
+      ],
+      "price_in_sek": 125,
+      "family_size_price_in_sek": 310
+    },
+    {
+      "dish_number": 34,
+      "name": "translation.key.disc.gyro_pizza.calzone_el_greco",
+      "ingredients": [
+        "translation.key.ingredient.gyros_meat",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.baked_in"
+      ],
+      "price_in_sek": 125
+    }
+  ],
+  "gourmet_pizzas": [
+    {
+      "dish_number": 35,
+      "name": "translation.key.disc.gourmet.italiana",
+      "ingredients": [
+        "translation.key.ingredient.mozzarella",
+        "translation.key.ingredient.fresh_tomatoes",
+        "translation.key.ingredient.fresh_basil"
+      ],
+      "price_in_sek": 120
+    },
+    {
+      "dish_number": 36,
+      "name": "translation.key.disc.gourmet.calzone_italiano",
+      "ingredients": [
+        "translation.key.ingredient.tomato",
+        "translation.key.ingredient.mozzarella",
+        "translation.key.ingredient.parmesan"
+      ],
+      "price_in_sek": 130
+    },
+    {
+      "dish_number": 37,
+      "name": "translation.key.disc.gourmet.prosciutto",
+      "ingredients": [
+        "translation.key.ingredient.mozzarella",
+        "translation.key.ingredient.dry_cured_ham",
+        "translation.key.ingredient.arugula",
+        "translation.key.ingredient.parmesan"
+      ],
+      "price_in_sek": 145
+    },
+    {
+      "dish_number": 38,
+      "name": "translation.key.disc.gourmet.campagnola",
+      "ingredients": [
+        "translation.key.ingredient.mozzarella",
+        "translation.key.ingredient.salami",
+        "translation.key.ingredient.jalapeno",
+        "translation.key.ingredient.parmesan",
+        "translation.key.ingredient.arugula"
+      ],
+      "price_in_sek": 145
+    },
+    {
+      "dish_number": 39,
+      "name": "translation.key.disc.gourmet.vegetale",
+      "ingredients": [
+        "translation.key.ingredient.broccoli",
+        "translation.key.ingredient.sun_dried_tomatoes",
+        "translation.key.ingredient.kalamata_olives",
+        "translation.key.ingredient.artichoke",
+        "translation.key.ingredient.mushrooms",
+        "translation.key.ingredient.mozzarella"
+      ],
+      "price_in_sek": 140
+    },
+    {
+      "dish_number": 40,
+      "name": "translation.key.disc.gourmet.della_casa",
+      "ingredients": [
+        "translation.key.ingredient.tenderloin",
+        "translation.key.ingredient.mozzarella",
+        "translation.key.ingredient.gorgonzola",
+        "translation.key.ingredient.sun_dried_tomatoes",
+        "translation.key.ingredient.arugula",
+        "translation.key.ingredient.olive_oil"
+      ],
+      "price_in_sek": 150
+    },
+    {
+      "dish_number": 41,
+      "name": "translation.key.disc.gourmet.scampi",
+      "ingredients": [
+        "translation.key.ingredient.mozzarella",
+        "translation.key.ingredient.chili",
+        "translation.key.ingredient.garlic",
+        "translation.key.ingredient.scampi"
+      ],
+      "price_in_sek": 145
+    },
+    {
+      "dish_number": 42,
+      "name": "translation.key.disc.gourmet.chevre",
+      "ingredients": [
+        "translation.key.ingredient.goat_cheese",
+        "translation.key.ingredient.honey",
+        "translation.key.ingredient.jalapeno",
+        "translation.key.ingredient.walnuts",
+        "translation.key.ingredient.arugula"
+      ],
+      "price_in_sek": 145
+    },
+    {
+      "dish_number": 43,
+      "name": "translation.key.disc.gourmet.pollo",
+      "ingredients": [
+        "translation.key.ingredient.mozzarella",
+        "translation.key.ingredient.chicken",
+        "translation.key.ingredient.pesto",
+        "translation.key.ingredient.fried_bacon"
+      ],
+      "price_in_sek": 140
+    }
+  ],
+  "pizza_customisations": [
+    {
+      "name": "translation.key.pizza.customisation.vegetables",
+      "price_in_sek": 10,
+      "family_size_price_in_sek": 20
+    },
+    {
+      "name": "translation.key.pizza.customisation.fruit",
+      "price_in_sek": 10,
+      "family_size_price_in_sek": 20
+    },
+    {
+      "name": "translation.key.pizza.customisation.meat",
+      "price_in_sek": 20,
+      "family_size_price_in_sek": 40
+    },
+    {
+      "name": "translation.key.pizza.customisation.fish",
+      "price_in_sek": 20,
+      "family_size_price_in_sek": 40
+    },
+    {
+      "name": "translation.key.pizza.customisation.gluten_free_pizza",
+      "price_in_sek": 30
+    },
+    {
+      "name": "translation.key.pizza.customisation.kids_pizza",
+      "price_in_sek": -10
+    },
+    {
+      "name": "translation.key.pizza.customisation.pizza_salad",
+      "price_in_sek": 10
+    },
+    {
+      "name": "translation.key.pizza.customisation.extra_cheese",
+      "price_in_sek": 15
+    }
+  ],
+  "enchilada": [
+    {
+      "dish_number": 44,
+      "name": "translation.key.disc.enchilada.enchilada",
+      "ingredients": [
+        "translation.key.ingredient.taco_meat",
+        "translation.key.ingredient.corn_chicken"
+      ],
+      "price_in_sek": 115
+    },
+    {
+      "dish_number": 45,
+      "name": "translation.key.disc.enchilada.vegetarian_enchilada",
+      "ingredients": [
+        "translation.key.ingredient.fresh_vegetables"
+      ],
+      "price_in_sek": 115
+    },
+    {
+      "dish_number": 46,
+      "name": "translation.key.disc.enchilada.chicken_enchilada",
+      "ingredients": [
+        "translation.key.ingredient.chicken",
+        "translation.key.ingredient.corn"
+      ],
+      "price_in_sek": 115
+    }
+  ],
+  "gyros": [
+    {
+      "dish_number": 47,
+      "name": "translation.key.disc.gyros.gyros_in_bread",
+      "price_in_sek": 105
+    },
+    {
+      "dish_number": 48,
+      "name": "translation.key.disc.gyros.gyros_plate",
+      "description": "translation.key.description.gyros_plate",
+      "price_in_sek": 120
+    },
+    {
+      "dish_number": 49,
+      "name": "translation.key.ingredient.tzatziki",
+      "price_in_sek": 10
+    },
+    {
+      "dish_number": 50,
+      "name": "translation.key.disc.gyros.small_greek_salad",
+      "price_in_sek": 65
+    }
+  ],
+  "salads": [
+    {
+      "dish_number": 51,
+      "name": "translation.key.disc.salad.greek_salad",
+      "ingredients": [
+        "translation.key.ingredient.iceberg_lettuce",
+        "translation.key.ingredient.tomatoes",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.cucumber",
+        "translation.key.ingredient.olives",
+        "translation.key.ingredient.feta_cheese",
+        "translation.key.ingredient.tzatziki",
+        "translation.key.ingredient.bread"
+      ],
+      "price_in_sek": 110
+    },
+    {
+      "dish_number": 52,
+      "name": "translation.key.disc.salad.shrimp_salad",
+      "ingredients": [
+        "translation.key.ingredient.iceberg_lettuce",
+        "translation.key.ingredient.tomatoes",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.cucumber",
+        "translation.key.ingredient.bell_pepper",
+        "translation.key.ingredient.lime_mayo",
+        "translation.key.ingredient.shrimp"
+      ],
+      "price_in_sek": 130
+    },
+    {
+      "dish_number": 53,
+      "name": "translation.key.disc.salad.tuna_salad",
+      "ingredients": [
+        "translation.key.ingredient.iceberg_lettuce",
+        "translation.key.ingredient.tomatoes",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.cucumber",
+        "translation.key.ingredient.bell_pepper",
+        "translation.key.ingredient.corn",
+        "translation.key.ingredient.rhode_island",
+        "translation.key.ingredient.tuna"
+      ],
+      "price_in_sek": 120
+    },
+    {
+      "dish_number": 54,
+      "name": "translation.key.disc.salad.chicken_salad",
+      "ingredients": [
+        "translation.key.ingredient.iceberg_lettuce",
+        "translation.key.ingredient.tomatoes",
+        "translation.key.ingredient.red_onion",
+        "translation.key.ingredient.cucumber",
+        "translation.key.ingredient.bell_pepper",
+        "translation.key.ingredient.sweet_chili",
+        "translation.key.ingredient.chicken"
+      ],
+      "price_in_sek": 120
+    }
+  ],
+  "pasta": [
+    {
+      "dish_number": 55,
+      "name": "translation.key.disc.pasta.homemade_lasagna",
+      "description": "translation.key.description.homemade_lasagna",
+      "price_in_sek": 125
+    },
+    {
+      "dish_number": 56,
+      "name": "translation.key.disc.pasta.pasta_bolognese",
+      "price_in_sek": 120
+    },
+    {
+      "dish_number": 57,
+      "name": "translation.key.disc.pasta.pasta_gorgonzola",
+      "price_in_sek": 120
+    }
+  ],
+  "other": [
+    {
+      "dish_number": 58,
+      "name": "translation.key.disc.other.homemade_pita_bread",
+      "price_in_sek": 20
+    },
+    {
+      "dish_number": 59,
+      "name": "translation.key.disc.other.garlic_bread",
+      "price_in_sek": 45
+    },
+    {
+      "dish_number": 60,
+      "name": "translation.key.disc.other.french_fries",
+      "price_in_sek": 40
+    },
+    {
+      "dish_number": 61,
+      "name": "translation.key.ingredient.tzatziki",
+      "price_in_sek": 10
+    },
+    {
+      "dish_number": 62,
+      "name": "translation.key.disc.gyros.small_greek_salad",
+      "price_in_sek": 65
+    }
+  ]
+}

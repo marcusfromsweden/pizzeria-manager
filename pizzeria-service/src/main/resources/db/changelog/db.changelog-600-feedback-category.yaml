@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 600-01-add-feedback-category
+      author: claude
+      changes:
+        - addColumn:
+            tableName: feedback
+            columns:
+              - column:
+                  name: category
+                  type: VARCHAR(100)

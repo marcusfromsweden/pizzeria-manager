@@ -1,0 +1,9 @@
+id,name_key,price_regular,price_family,sort_order
+b8572234-7f8a-4974-86c3-cddeb7a68057,translation.key.pizza.customisation.vegetables,10.00,20.00,1
+8f717d2e-770b-4afc-8278-f72d9e6532d4,translation.key.pizza.customisation.fruit,10.00,20.00,2
+3dc2ab67-7881-4745-9ad4-524afef62534,translation.key.pizza.customisation.meat,20.00,40.00,3
+9c8e4683-2abd-46e8-9d17-dfb04938038d,translation.key.pizza.customisation.fish,20.00,40.00,4
+718da87f-40d2-4b0b-8aa5-202a216f2b5d,translation.key.pizza.customisation.gluten_free_pizza,30.00,,5
+34c99251-076b-4264-89f4-c84ebfa983b3,translation.key.pizza.customisation.kids_pizza,-10.00,,6
+2eb3ce3d-5ed6-4ff2-9ae7-e03b6e685df0,translation.key.pizza.customisation.pizza_salad,10.00,,7
+65210c7b-1d45-4ddd-8b65-b042ddd4055a,translation.key.pizza.customisation.extra_cheese,15.00,,8

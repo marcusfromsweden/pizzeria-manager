@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: pizzeria-service
+  main:
+    web-application-type: reactive
+  r2dbc:
+    url: ${SPRING_R2DBC_URL:r2dbc:postgresql://localhost:5432/pizzeria}
+    username: ${SPRING_R2DBC_USERNAME:pizzeria}
+    password: ${SPRING_R2DBC_PASSWORD:pizzeria}
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    url: ${SPRING_LIQUIBASE_URL:jdbc:postgresql://localhost:5432/pizzeria}
+    user: ${SPRING_LIQUIBASE_USERNAME:pizzeria}
+    password: ${SPRING_LIQUIBASE_PASSWORD:pizzeria}
+    enabled: ${SPRING_LIQUIBASE_ENABLED:true}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+server:
+  port: 9900
+  shutdown: graceful
+
+service:
+  messages:
+    basename: classpath:messages
+
+jwt:
+  secret: ${JWT_SECRET:dev-secret-key-minimum-32-chars-long-for-hs256}
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}

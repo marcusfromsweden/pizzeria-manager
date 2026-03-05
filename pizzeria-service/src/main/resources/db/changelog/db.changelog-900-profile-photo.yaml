@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 900-add-profile-photo
+      author: claude
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: profile_photo_base64
+                  type: TEXT
+                  remarks: "User profile photo stored as base64 data URL (data:image/jpeg;base64,...). Max ~500KB."

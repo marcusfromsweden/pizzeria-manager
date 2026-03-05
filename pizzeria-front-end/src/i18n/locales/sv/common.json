@@ -1,0 +1,183 @@
+{
+  "home": {
+    "features": {
+      "menu": {
+        "title": "Meny",
+        "description": "Utforska våra rätter och anpassa dem efter smak.",
+        "link": "Visa meny →"
+      },
+      "dietary": {
+        "title": "Kostpreferenser",
+        "description": "Välj kostpreferenser för att hitta pizzor som passar dig.",
+        "link": "Ställ in preferenser →"
+      },
+      "scores": {
+        "title": "Betygsätt pizzor",
+        "description": "Dela din feedback och betygsätt dina favoritpizzor.",
+        "link": "Betygsätt nu →"
+      },
+      "signInLink": "Logga in →"
+    },
+    "cta": {
+      "title": "Gå med idag!",
+      "description": "Skapa ett konto för att spara dina preferenser, betygsätta pizzor och mer."
+    }
+  },
+  "nav": {
+    "home": "Hem",
+    "menu": "Meny",
+    "pizzas": "Pizzor",
+    "ingredients": "Ingredienser",
+    "cart": "Varukorg",
+    "orders": "Mina beställningar",
+    "scores": "Omdömen",
+    "feedback": "Feedback",
+    "profile": "Profil",
+    "preferences": "Preferenser",
+    "signIn": "Logga in",
+    "signOut": "Logga ut",
+    "register": "Registrera",
+    "admin": "Admin",
+    "adminPrices": "Prishantering",
+    "adminFeedback": "Kundfeedback"
+  },
+  "actions": {
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "submit": "Skicka",
+    "delete": "Ta bort",
+    "add": "Lägg till",
+    "remove": "Ta bort",
+    "edit": "Redigera",
+    "back": "Tillbaka",
+    "next": "Nästa",
+    "close": "Stäng",
+    "dismiss": "Avfärda"
+  },
+  "status": {
+    "loading": "Laddar...",
+    "saving": "Sparar...",
+    "error": "Ett fel uppstod",
+    "success": "Lyckades",
+    "notFound": "Hittades inte",
+    "open": "Öppet",
+    "closed": "Stängt"
+  },
+  "validation": {
+    "required": "Detta fält är obligatoriskt",
+    "invalidEmail": "Ange en giltig e-postadress",
+    "passwordMinLength": "Lösenordet måste vara minst 8 tecken",
+    "passwordMaxLength": "Lösenordet får vara högst 100 tecken"
+  },
+  "language": {
+    "label": "Språk",
+    "en": "English",
+    "sv": "Svenska"
+  },
+  "currency": {
+    "sek": "kr"
+  },
+  "footer": {
+    "openingHours": "Öppettider",
+    "contact": "Kontakt",
+    "rights": "Alla rättigheter förbehållna."
+  },
+  "contact": {
+    "phone": "Telefon"
+  },
+  "days": {
+    "monday": "Måndag",
+    "tuesday": "Tisdag",
+    "wednesday": "Onsdag",
+    "thursday": "Torsdag",
+    "friday": "Fredag",
+    "saturday": "Lördag",
+    "sunday": "Söndag"
+  },
+  "error": {
+    "notFound": {
+      "message": "Sidan du letar efter finns inte eller har flyttats."
+    }
+  },
+  "pizzas": {
+    "empty": "Inga pizzor tillgängliga"
+  },
+  "scores": {
+    "unknownPizza": "Okänd pizza"
+  },
+  "console": {
+    "title": "Konsolloggar",
+    "settings": "Konsolinställningar",
+    "captureSettings": "Konsolinfångning",
+    "viewLogs": "Visa infångade loggar",
+    "noLogs": "Inga konsolloggar ännu",
+    "copyLatest": "Kopiera senaste",
+    "copied": "Kopierat!",
+    "clearAll": "Rensa alla",
+    "level": {
+      "error": "Fel",
+      "warn": "Varningar",
+      "info": "Info",
+      "debug": "Felsökning"
+    }
+  },
+  "admin": {
+    "noAccess": "Du har inte adminbehörighet för denna pizzeria.",
+    "prices": {
+      "title": "Prishantering",
+      "subtitle": "Exportera och importera priser för menyrätter och tillval.",
+      "export": "Exportera priser",
+      "exportDescription": "Ladda ner en CSV-fil med alla nuvarande priser för menyrätter och tillval.",
+      "exporting": "Exporterar...",
+      "downloadCsv": "Ladda ner CSV",
+      "import": "Importera priser",
+      "importDescription": "Ladda upp en CSV-fil för att uppdatera priser. Använd förhandsgranskning för att se ändringar innan de tillämpas.",
+      "selectFile": "Välj CSV-fil",
+      "dryRun": "Förhandsgranskning (visa ändringar utan att tillämpa)",
+      "importing": "Bearbetar...",
+      "previewChanges": "Förhandsgranska ändringar",
+      "applyChanges": "Tillämpa ändringar",
+      "previewResults": "Förhandsgranskningsresultat",
+      "importResults": "Importresultat",
+      "dryRunNote": "Detta är en förhandsgranskning. Inga ändringar har tillämpats ännu.",
+      "total": "Totalt",
+      "updated": "Uppdaterade",
+      "unchanged": "Oförändrade",
+      "errors": "Fel",
+      "type": "Typ",
+      "name": "Namn",
+      "regularPrice": "Ordinarie",
+      "familyPrice": "Familj",
+      "status": "Status",
+      "confirmApply": "Tillämpa dessa ändringar",
+      "statusUpdated": "Uppdaterad",
+      "statusNoChange": "Ingen ändring",
+      "statusNotFound": "Hittades inte",
+      "typeMenuItem": "Menyrätt",
+      "typeExtra": "Tillval"
+    },
+    "feedback": {
+      "title": "Kundfeedback",
+      "subtitle": "Visa och svara på feedback från dina kunder.",
+      "noAccess": "Du har inte adminbehörighet för att visa kundfeedback.",
+      "error": "Kunde inte ladda feedback.",
+      "date": "Datum",
+      "message": "Meddelande",
+      "category": "Kategori",
+      "rating": "Betyg",
+      "status": "Status",
+      "statusReplied": "Besvarad",
+      "statusOpen": "Öppen",
+      "noFeedback": "Ingen kundfeedback ännu.",
+      "expand": "Expandera",
+      "fullMessage": "Hela meddelandet",
+      "yourReply": "Ditt svar",
+      "writeReply": "Skriv ett svar",
+      "replyPlaceholder": "Skriv ditt svar till kunden...",
+      "replyRequired": "Vänligen skriv ett svarsmeddelande.",
+      "replyError": "Kunde inte skicka svar. Försök igen.",
+      "cancel": "Avbryt",
+      "sendReply": "Skicka svar"
+    }
+  }
+}

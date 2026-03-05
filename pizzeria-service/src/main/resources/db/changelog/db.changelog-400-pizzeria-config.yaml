@@ -1,0 +1,41 @@
+databaseChangeLog:
+  # =============================================================================
+  # RAMONA PIZZERIA - Add address, opening hours and phone numbers
+  # =============================================================================
+  - changeSet:
+      id: 400-01-add-opening-hours-and-phone-numbers
+      author: marcus
+      comment: Add address, opening hours and phone numbers to Ramona pizzeria config
+      changes:
+        - update:
+            tableName: pizzerias
+            columns:
+              - column:
+                  name: config
+                  valueComputed: >-
+                    '{
+                      "features": {
+                        "dietarySuitability": true,
+                        "pizzaScores": true,
+                        "emailVerification": true,
+                        "familySizePricing": true
+                      },
+                      "address": {
+                        "street": "Föreningsgatan 67",
+                        "postalCode": "211 52",
+                        "city": "Malmö"
+                      },
+                      "openingHours": {
+                        "monday": [{"open": "11:00", "close": "14:00"}, {"open": "16:30", "close": "21:00"}],
+                        "tuesday": [{"open": "11:00", "close": "14:00"}, {"open": "16:30", "close": "21:00"}],
+                        "wednesday": [{"open": "11:00", "close": "14:00"}, {"open": "16:30", "close": "21:00"}],
+                        "thursday": [{"open": "11:00", "close": "14:00"}, {"open": "16:30", "close": "21:00"}],
+                        "friday": [{"open": "11:00", "close": "14:00"}, {"open": "16:30", "close": "21:00"}],
+                        "saturday": [{"open": "16:00", "close": "21:00"}],
+                        "sunday": [{"open": "16:00", "close": "21:00"}]
+                      },
+                      "phoneNumbers": [
+                        {"label": "contact.phone", "number": "040 611 34 18"}
+                      ]
+                    }'::jsonb
+            where: code = 'ramonamalmo'

@@ -1,0 +1,176 @@
+import { useState, type FormEvent, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { usePizzeriaCode } from '../../hooks/usePizzeriaCode';
+import { forgotPassword } from '../../api/auth';
+import { getApiErrorMessage } from '../../api/client';
+import { Button } from '../../components/ui/Button';
+import { Input } from '../../components/ui/Input';
+import { Alert } from '../../components/ui/Alert';
+import { Card } from '../../components/ui/Card';
+
+export const ForgotPasswordPage = () => {
+  const { t } = useTranslation('auth');
+  const pizzeriaCode = usePizzeriaCode();
+
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [resetToken, setResetToken] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const curlCommand = resetToken
+    ? `curl -X POST http://localhost:9900/api/v1/pizzerias/${pizzeriaCode}/users/reset-password \\
+  -H "Content-Type: application/json" \\
+  -d '{"token":"${resetToken}","newPassword":"NewPassword123!"}'`
+    : '';
+
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(curlCommand);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  }, [curlCommand]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await forgotPassword(pizzeriaCode, { email });
+      setResetToken(response.data.resetToken);
+    } catch (err) {
+      setError(getApiErrorMessage(err));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (resetToken) {
+    return (
+      <div className="mx-auto max-w-md">
+        <Card padding="lg">
+          <Alert variant="success" className="mb-4">
+            <h3 className="font-medium">{t('forgotPassword.success.title')}</h3>
+            <p className="mt-1">{t('forgotPassword.success.message')}</p>
+          </Alert>
+
+          <div className="mt-4 rounded-lg bg-slate-100 p-4">
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-slate-600">
+                {t('forgotPassword.success.curlCommand')}
+              </p>
+              <button
+                type="button"
+                onClick={() => void handleCopy()}
+                className="flex items-center gap-1 rounded px-2 py-1 text-xs text-slate-500 hover:bg-slate-200 hover:text-slate-700"
+                title={copied ? 'Copied!' : 'Copy to clipboard'}
+              >
+                {copied ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4 text-green-600"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                    <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                  </svg>
+                )}
+                <span>{copied ? 'Copied!' : 'Copy'}</span>
+              </button>
+            </div>
+            <pre className="mt-2 overflow-x-auto text-xs text-slate-700">
+              <code>{curlCommand}</code>
+            </pre>
+          </div>
+
+          <div className="mt-6 flex flex-col gap-3">
+            <Link to={`/${pizzeriaCode}/reset-password`}>
+              <Button variant="primary" className="w-full">
+                {t('resetPassword.title')}
+              </Button>
+            </Link>
+            <Link to={`/${pizzeriaCode}/login`}>
+              <Button variant="secondary" className="w-full">
+                {t('login.title')}
+              </Button>
+            </Link>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-md">
+      <Card padding="lg">
+        <div className="mb-6 text-center">
+          <h1 className="text-2xl font-bold text-slate-900">
+            {t('forgotPassword.title')}
+          </h1>
+          <p className="mt-2 text-sm text-slate-600">
+            {t('forgotPassword.subtitle')}
+          </p>
+        </div>
+
+        {error && (
+          <Alert variant="error" className="mb-4" onClose={() => setError(null)}>
+            {error}
+          </Alert>
+        )}
+
+        <form onSubmit={(e) => void handleSubmit(e)} className="space-y-4">
+          <Input
+            label={t('forgotPassword.email')}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={t('forgotPassword.emailPlaceholder')}
+            required
+            autoComplete="email"
+          />
+
+          <Button
+            type="submit"
+            className="w-full"
+            isLoading={isSubmitting}
+            disabled={isSubmitting}
+          >
+            {isSubmitting
+              ? t('forgotPassword.submitting')
+              : t('forgotPassword.submit')}
+          </Button>
+        </form>
+
+        <div className="mt-6 text-center text-sm text-slate-600">
+          <Link
+            to={`/${pizzeriaCode}/login`}
+            className="font-medium text-primary-600 hover:text-primary-500"
+          >
+            {t('login.title')}
+          </Link>
+        </div>
+      </Card>
+    </div>
+  );
+};
+
+export default ForgotPasswordPage;

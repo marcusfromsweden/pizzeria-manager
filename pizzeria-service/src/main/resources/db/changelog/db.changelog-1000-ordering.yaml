@@ -1,0 +1,434 @@
+databaseChangeLog:
+  # =============================================================================
+  # DELIVERY ADDRESSES TABLE - Saved user delivery addresses
+  # =============================================================================
+  - changeSet:
+      id: 1000-01-create-delivery-addresses
+      author: claude
+      comment: Create delivery addresses table for saved user addresses
+      changes:
+        - createTable:
+            tableName: delivery_addresses
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: label
+                  type: VARCHAR(50)
+                  remarks: Label for the address (e.g., Home, Work)
+              - column:
+                  name: street
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: postal_code
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: VARCHAR(30)
+              - column:
+                  name: instructions
+                  type: TEXT
+                  remarks: Delivery instructions
+              - column:
+                  name: is_default
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 1000-02-delivery-addresses-constraints
+      author: claude
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: delivery_addresses
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_delivery_addresses_pizzeria
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: delivery_addresses
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_delivery_addresses_user
+            onDelete: CASCADE
+        - createIndex:
+            tableName: delivery_addresses
+            indexName: idx_delivery_addresses_user_pizzeria
+            columns:
+              - column:
+                  name: user_id
+              - column:
+                  name: pizzeria_id
+
+  # =============================================================================
+  # ORDERS TABLE - Main order records
+  # =============================================================================
+  - changeSet:
+      id: 1000-03-create-orders
+      author: claude
+      comment: Create orders table for customer orders
+      changes:
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_number
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+                  remarks: Human-readable order number (e.g., RM-20240115-001)
+              - column:
+                  name: status
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+                  remarks: PENDING, CONFIRMED, PREPARING, READY, OUT_FOR_DELIVERY, DELIVERED, PICKED_UP, CANCELLED
+              - column:
+                  name: fulfillment_type
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+                  remarks: PICKUP or DELIVERY
+              - column:
+                  name: delivery_address_id
+                  type: UUID
+                  remarks: Reference to saved address (optional)
+              - column:
+                  name: delivery_street
+                  type: VARCHAR(255)
+                  remarks: Snapshot of delivery street at order time
+              - column:
+                  name: delivery_postal_code
+                  type: VARCHAR(20)
+              - column:
+                  name: delivery_city
+                  type: VARCHAR(100)
+              - column:
+                  name: delivery_phone
+                  type: VARCHAR(30)
+              - column:
+                  name: delivery_instructions
+                  type: TEXT
+              - column:
+                  name: requested_time
+                  type: TIMESTAMP WITH TIME ZONE
+                  remarks: Requested pickup/delivery time (null means ASAP)
+              - column:
+                  name: estimated_ready_time
+                  type: TIMESTAMP WITH TIME ZONE
+                  remarks: Estimated time order will be ready
+              - column:
+                  name: subtotal
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_fee
+                  type: DECIMAL(10,2)
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_notes
+                  type: TEXT
+                  remarks: Notes from customer for the order
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 1000-04-orders-constraints
+      author: claude
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: orders
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_orders_pizzeria
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: orders
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_orders_user
+            onDelete: CASCADE
+        - addUniqueConstraint:
+            tableName: orders
+            columnNames: pizzeria_id, order_number
+            constraintName: uq_orders_pizzeria_order_number
+        - createIndex:
+            tableName: orders
+            indexName: idx_orders_user_pizzeria
+            columns:
+              - column:
+                  name: user_id
+              - column:
+                  name: pizzeria_id
+        - createIndex:
+            tableName: orders
+            indexName: idx_orders_status
+            columns:
+              - column:
+                  name: status
+        - createIndex:
+            tableName: orders
+            indexName: idx_orders_created_at
+            columns:
+              - column:
+                  name: created_at
+                  descending: true
+
+  # =============================================================================
+  # ORDER ITEMS TABLE - Individual items in an order
+  # =============================================================================
+  - changeSet:
+      id: 1000-05-create-order-items
+      author: claude
+      comment: Create order items table for items within orders
+      changes:
+        - createTable:
+            tableName: order_items
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: menu_item_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                  remarks: Reference to the menu item ordered
+              - column:
+                  name: menu_item_name_key
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                  remarks: Snapshot of menu item name translation key at order time
+              - column:
+                  name: size
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+                  remarks: REGULAR or FAMILY
+              - column:
+                  name: quantity
+                  type: INTEGER
+                  defaultValueNumeric: 1
+                  constraints:
+                    nullable: false
+              - column:
+                  name: base_price
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+                  remarks: Base price per item at order time
+              - column:
+                  name: customisations_price
+                  type: DECIMAL(10,2)
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+                  remarks: Total customisations price per item
+              - column:
+                  name: item_total
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+                  remarks: (base_price + customisations_price) * quantity
+              - column:
+                  name: special_instructions
+                  type: TEXT
+                  remarks: Special instructions for this item
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 1000-06-order-items-constraints
+      author: claude
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: order_items
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_order_items_pizzeria
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: order_items
+            baseColumnNames: order_id
+            referencedTableName: orders
+            referencedColumnNames: id
+            constraintName: fk_order_items_order
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: order_items
+            baseColumnNames: menu_item_id
+            referencedTableName: menu_items
+            referencedColumnNames: id
+            constraintName: fk_order_items_menu_item
+            onDelete: RESTRICT
+        - createIndex:
+            tableName: order_items
+            indexName: idx_order_items_order
+            columns:
+              - column:
+                  name: order_id
+
+  # =============================================================================
+  # ORDER ITEM CUSTOMISATIONS TABLE - Extras/customisations for order items
+  # =============================================================================
+  - changeSet:
+      id: 1000-07-create-order-item-customisations
+      author: claude
+      comment: Create order item customisations table for extras added to items
+      changes:
+        - createTable:
+            tableName: order_item_customisations
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_item_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customisation_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                  remarks: Reference to the pizza customisation
+              - column:
+                  name: customisation_name_key
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                  remarks: Snapshot of customisation name translation key at order time
+              - column:
+                  name: price
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+                  remarks: Price of this customisation at order time
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 1000-08-order-item-customisations-constraints
+      author: claude
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: order_item_customisations
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_order_item_customisations_pizzeria
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: order_item_customisations
+            baseColumnNames: order_item_id
+            referencedTableName: order_items
+            referencedColumnNames: id
+            constraintName: fk_order_item_customisations_item
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: order_item_customisations
+            baseColumnNames: customisation_id
+            referencedTableName: pizza_customisations
+            referencedColumnNames: id
+            constraintName: fk_order_item_customisations_customisation
+            onDelete: RESTRICT
+        - createIndex:
+            tableName: order_item_customisations
+            indexName: idx_order_item_customisations_item
+            columns:
+              - column:
+                  name: order_item_id

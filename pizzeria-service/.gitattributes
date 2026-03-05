@@ -1,0 +1,24 @@
+
+# Enforce LF for text files
+* text=auto eol=lf
+
+# Specific file types that should always use LF
+*.java      text eol=lf
+*.xml       text eol=lf
+*.yaml      text eol=lf
+*.yml       text eol=lf
+*.properties text eol=lf
+*.sql       text eol=lf
+*.sh        text eol=lf
+*.gradle    text eol=lf
+*.md        text eol=lf
+
+# Docker files
+docker-compose.yml text eol=lf
+Dockerfile         text eol=lf
+
+# Optional: treat binary files explicitly
+*.png binary
+*.jpg binary
+*.gif binary
+*.jar binary

@@ -1,0 +1,28 @@
+databaseChangeLog:
+  # =============================================================================
+  # PIZZERIA ADMIN FEATURE - Add admin column to users
+  # =============================================================================
+  - changeSet:
+      id: 500-01-add-pizzeria-admin-to-users
+      author: claude
+      comment: Add pizzeria_admin column to users for admin access control
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: pizzeria_admin
+                  type: VARCHAR(64)
+                  remarks: Pizzeria code this user can administer (null = not an admin)
+
+  - changeSet:
+      id: 500-02-add-pizzeria-admin-index
+      author: claude
+      comment: Add index on pizzeria_admin for efficient lookups
+      changes:
+        - createIndex:
+            tableName: users
+            indexName: idx_users_pizzeria_admin
+            columns:
+              - column:
+                  name: pizzeria_admin

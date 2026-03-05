@@ -1,0 +1,866 @@
+databaseChangeLog:
+  # =============================================================================
+  # PIZZERIA TABLE - Central tenant registry
+  # =============================================================================
+  - changeSet:
+      id: 300-01-create-pizzerias
+      author: claude
+      comment: Create pizzerias table for multi-tenant support
+      changes:
+        - createTable:
+            tableName: pizzerias
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+                  remarks: Unique identifier used in URLs/headers (e.g., "marios", "luigi")
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                  remarks: Display name of the pizzeria
+              - column:
+                  name: currency
+                  type: VARCHAR(3)
+                  defaultValue: "SEK"
+                  constraints:
+                    nullable: false
+                  remarks: ISO 4217 currency code
+              - column:
+                  name: timezone
+                  type: VARCHAR(64)
+                  defaultValue: "Europe/Stockholm"
+                  constraints:
+                    nullable: false
+                  remarks: IANA timezone identifier
+              - column:
+                  name: config
+                  type: JSONB
+                  remarks: Pizzeria-specific configuration (opening hours, delivery zones, features)
+              - column:
+                  name: branding
+                  type: JSONB
+                  remarks: Branding configuration (logo URL, colors, tagline)
+              - column:
+                  name: active
+                  type: BOOLEAN
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 300-02-add-pizzeria-constraints
+      author: claude
+      changes:
+        - addUniqueConstraint:
+            tableName: pizzerias
+            columnNames: code
+            constraintName: uq_pizzerias_code
+        - createIndex:
+            tableName: pizzerias
+            indexName: idx_pizzerias_code
+            columns:
+              - column:
+                  name: code
+        - createIndex:
+            tableName: pizzerias
+            indexName: idx_pizzerias_active
+            columns:
+              - column:
+                  name: active
+
+  # =============================================================================
+  # DEFAULT PIZZERIA - Insert default tenant for existing data
+  # =============================================================================
+  - changeSet:
+      id: 300-03-insert-default-pizzeria
+      author: claude
+      comment: Create default pizzeria for existing data migration
+      changes:
+        - insert:
+            tableName: pizzerias
+            columns:
+              - column:
+                  name: id
+                  value: "00000000-0000-0000-0000-000000000001"
+              - column:
+                  name: code
+                  value: "default"
+              - column:
+                  name: name
+                  value: "Default Pizzeria"
+              - column:
+                  name: currency
+                  value: "SEK"
+              - column:
+                  name: timezone
+                  value: "Europe/Stockholm"
+              - column:
+                  name: config
+                  valueComputed: "'{\"features\": {\"dietarySuitability\": true, \"pizzaScores\": true, \"emailVerification\": true, \"familySizePricing\": true}}'::jsonb"
+              - column:
+                  name: branding
+                  valueComputed: "'{\"primaryColor\": \"#D32F2F\", \"tagline\": \"Default Pizzeria\"}'::jsonb"
+              - column:
+                  name: active
+                  valueBoolean: true
+
+  # =============================================================================
+  # ADD PIZZERIA_ID TO MENU_SECTIONS
+  # =============================================================================
+  - changeSet:
+      id: 300-04-add-pizzeria-id-to-menu-sections
+      author: claude
+      changes:
+        - addColumn:
+            tableName: menu_sections
+            columns:
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  remarks: Reference to owning pizzeria
+
+  - changeSet:
+      id: 300-05-migrate-menu-sections-to-default-pizzeria
+      author: claude
+      comment: Assign existing menu sections to default pizzeria
+      changes:
+        - update:
+            tableName: menu_sections
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000001"
+            where: pizzeria_id IS NULL
+
+  - changeSet:
+      id: 300-06-add-menu-sections-pizzeria-constraints
+      author: claude
+      changes:
+        - addNotNullConstraint:
+            tableName: menu_sections
+            columnName: pizzeria_id
+        - addForeignKeyConstraint:
+            baseTableName: menu_sections
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_menu_sections_pizzeria
+            onDelete: CASCADE
+        - createIndex:
+            tableName: menu_sections
+            indexName: idx_menu_sections_pizzeria
+            columns:
+              - column:
+                  name: pizzeria_id
+        - dropUniqueConstraint:
+            tableName: menu_sections
+            constraintName: uq_menu_sections_code
+        - addUniqueConstraint:
+            tableName: menu_sections
+            columnNames: pizzeria_id, code
+            constraintName: uq_menu_sections_pizzeria_code
+
+  # =============================================================================
+  # ADD PIZZERIA_ID TO MENU_ITEMS
+  # =============================================================================
+  - changeSet:
+      id: 300-07-add-pizzeria-id-to-menu-items
+      author: claude
+      changes:
+        - addColumn:
+            tableName: menu_items
+            columns:
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  remarks: Reference to owning pizzeria
+
+  - changeSet:
+      id: 300-08-migrate-menu-items-to-default-pizzeria
+      author: claude
+      comment: Assign existing menu items to default pizzeria
+      changes:
+        - update:
+            tableName: menu_items
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000001"
+            where: pizzeria_id IS NULL
+
+  - changeSet:
+      id: 300-09-add-menu-items-pizzeria-constraints
+      author: claude
+      changes:
+        - addNotNullConstraint:
+            tableName: menu_items
+            columnName: pizzeria_id
+        - addForeignKeyConstraint:
+            baseTableName: menu_items
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_menu_items_pizzeria
+            onDelete: CASCADE
+        - createIndex:
+            tableName: menu_items
+            indexName: idx_menu_items_pizzeria
+            columns:
+              - column:
+                  name: pizzeria_id
+        - dropUniqueConstraint:
+            tableName: menu_items
+            constraintName: uq_menu_items_dish_number
+        - addUniqueConstraint:
+            tableName: menu_items
+            columnNames: pizzeria_id, dish_number
+            constraintName: uq_menu_items_pizzeria_dish_number
+
+  # =============================================================================
+  # ADD PIZZERIA_ID TO MENU_INGREDIENT_FACTS
+  # =============================================================================
+  - changeSet:
+      id: 300-10-add-pizzeria-id-to-menu-ingredient-facts
+      author: claude
+      changes:
+        - addColumn:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  remarks: Reference to owning pizzeria
+
+  - changeSet:
+      id: 300-11-migrate-menu-ingredient-facts-to-default-pizzeria
+      author: claude
+      comment: Assign existing ingredient facts to default pizzeria
+      changes:
+        - update:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000001"
+            where: pizzeria_id IS NULL
+
+  - changeSet:
+      id: 300-12-add-menu-ingredient-facts-pizzeria-constraints
+      author: claude
+      changes:
+        - addNotNullConstraint:
+            tableName: menu_ingredient_facts
+            columnName: pizzeria_id
+        - addForeignKeyConstraint:
+            baseTableName: menu_ingredient_facts
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_menu_ingredient_facts_pizzeria
+            onDelete: CASCADE
+        - createIndex:
+            tableName: menu_ingredient_facts
+            indexName: idx_menu_ingredient_facts_pizzeria
+            columns:
+              - column:
+                  name: pizzeria_id
+        - dropUniqueConstraint:
+            tableName: menu_ingredient_facts
+            constraintName: uq_menu_ingredient_facts_key
+        - addUniqueConstraint:
+            tableName: menu_ingredient_facts
+            columnNames: pizzeria_id, ingredient_key
+            constraintName: uq_menu_ingredient_facts_pizzeria_key
+
+  # =============================================================================
+  # ADD PIZZERIA_ID TO PIZZA_CUSTOMISATIONS
+  # =============================================================================
+  - changeSet:
+      id: 300-13-add-pizzeria-id-to-pizza-customisations
+      author: claude
+      changes:
+        - addColumn:
+            tableName: pizza_customisations
+            columns:
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  remarks: Reference to owning pizzeria
+
+  - changeSet:
+      id: 300-14-migrate-pizza-customisations-to-default-pizzeria
+      author: claude
+      comment: Assign existing pizza customisations to default pizzeria
+      changes:
+        - update:
+            tableName: pizza_customisations
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000001"
+            where: pizzeria_id IS NULL
+
+  - changeSet:
+      id: 300-15-add-pizza-customisations-pizzeria-constraints
+      author: claude
+      changes:
+        - addNotNullConstraint:
+            tableName: pizza_customisations
+            columnName: pizzeria_id
+        - addForeignKeyConstraint:
+            baseTableName: pizza_customisations
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_pizza_customisations_pizzeria
+            onDelete: CASCADE
+        - createIndex:
+            tableName: pizza_customisations
+            indexName: idx_pizza_customisations_pizzeria
+            columns:
+              - column:
+                  name: pizzeria_id
+
+  # =============================================================================
+  # ADD PIZZERIA_ID TO USERS
+  # =============================================================================
+  - changeSet:
+      id: 300-16-add-pizzeria-id-to-users
+      author: claude
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  remarks: Reference to pizzeria where user registered
+
+  - changeSet:
+      id: 300-17-migrate-users-to-default-pizzeria
+      author: claude
+      comment: Assign existing users to default pizzeria
+      changes:
+        - update:
+            tableName: users
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000001"
+            where: pizzeria_id IS NULL
+
+  - changeSet:
+      id: 300-18-add-users-pizzeria-constraints
+      author: claude
+      changes:
+        - addNotNullConstraint:
+            tableName: users
+            columnName: pizzeria_id
+        - addForeignKeyConstraint:
+            baseTableName: users
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_users_pizzeria
+            onDelete: CASCADE
+        - createIndex:
+            tableName: users
+            indexName: idx_users_pizzeria
+            columns:
+              - column:
+                  name: pizzeria_id
+        - dropUniqueConstraint:
+            tableName: users
+            constraintName: uq_users_email
+        - addUniqueConstraint:
+            tableName: users
+            columnNames: pizzeria_id, email
+            constraintName: uq_users_pizzeria_email
+            remarks: Email must be unique within a pizzeria, but same email can exist across pizzerias
+
+  # =============================================================================
+  # ADD PIZZERIA_ID TO FEEDBACK
+  # =============================================================================
+  - changeSet:
+      id: 300-19-add-pizzeria-id-to-feedback
+      author: claude
+      changes:
+        - addColumn:
+            tableName: feedback
+            columns:
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  remarks: Reference to pizzeria receiving feedback
+
+  - changeSet:
+      id: 300-20-migrate-feedback-to-default-pizzeria
+      author: claude
+      comment: Assign existing feedback to default pizzeria
+      changes:
+        - update:
+            tableName: feedback
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000001"
+            where: pizzeria_id IS NULL
+
+  - changeSet:
+      id: 300-21-add-feedback-pizzeria-constraints
+      author: claude
+      changes:
+        - addNotNullConstraint:
+            tableName: feedback
+            columnName: pizzeria_id
+        - addForeignKeyConstraint:
+            baseTableName: feedback
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_feedback_pizzeria
+            onDelete: CASCADE
+        - createIndex:
+            tableName: feedback
+            indexName: idx_feedback_pizzeria
+            columns:
+              - column:
+                  name: pizzeria_id
+
+  # =============================================================================
+  # ADD PIZZERIA_ID TO PIZZA_SCORES
+  # =============================================================================
+  - changeSet:
+      id: 300-22-add-pizzeria-id-to-pizza-scores
+      author: claude
+      changes:
+        - addColumn:
+            tableName: pizza_scores
+            columns:
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  remarks: Reference to pizzeria where score was given
+
+  - changeSet:
+      id: 300-23-migrate-pizza-scores-to-default-pizzeria
+      author: claude
+      comment: Assign existing pizza scores to default pizzeria
+      changes:
+        - update:
+            tableName: pizza_scores
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000001"
+            where: pizzeria_id IS NULL
+
+  - changeSet:
+      id: 300-24-add-pizza-scores-pizzeria-constraints
+      author: claude
+      changes:
+        - addNotNullConstraint:
+            tableName: pizza_scores
+            columnName: pizzeria_id
+        - addForeignKeyConstraint:
+            baseTableName: pizza_scores
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_pizza_scores_pizzeria
+            onDelete: CASCADE
+        - createIndex:
+            tableName: pizza_scores
+            indexName: idx_pizza_scores_pizzeria
+            columns:
+              - column:
+                  name: pizzeria_id
+
+  # =============================================================================
+  # ADD PIZZERIA_ID TO USER_PREFERRED_INGREDIENTS
+  # =============================================================================
+  - changeSet:
+      id: 300-25-add-pizzeria-id-to-user-preferred-ingredients
+      author: claude
+      changes:
+        - addColumn:
+            tableName: user_preferred_ingredients
+            columns:
+              - column:
+                  name: pizzeria_id
+                  type: UUID
+                  remarks: Reference to pizzeria context for this preference
+
+  - changeSet:
+      id: 300-26-migrate-user-preferred-ingredients-to-default-pizzeria
+      author: claude
+      comment: Assign existing user preferred ingredients to default pizzeria
+      changes:
+        - update:
+            tableName: user_preferred_ingredients
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000001"
+            where: pizzeria_id IS NULL
+
+  - changeSet:
+      id: 300-27-add-user-preferred-ingredients-pizzeria-constraints
+      author: claude
+      changes:
+        - addNotNullConstraint:
+            tableName: user_preferred_ingredients
+            columnName: pizzeria_id
+        - addForeignKeyConstraint:
+            baseTableName: user_preferred_ingredients
+            baseColumnNames: pizzeria_id
+            referencedTableName: pizzerias
+            referencedColumnNames: id
+            constraintName: fk_user_preferred_ingredients_pizzeria
+            onDelete: CASCADE
+        - createIndex:
+            tableName: user_preferred_ingredients
+            indexName: idx_user_preferred_ingredients_pizzeria
+            columns:
+              - column:
+                  name: pizzeria_id
+        - dropUniqueConstraint:
+            tableName: user_preferred_ingredients
+            constraintName: uq_user_preferred_unique
+        - addUniqueConstraint:
+            tableName: user_preferred_ingredients
+            columnNames: pizzeria_id, user_id, ingredient_id
+            constraintName: uq_user_preferred_pizzeria_unique
+
+  # =============================================================================
+  # RAMONA PIZZERIA - Malmö, Sweden
+  # =============================================================================
+  - changeSet:
+      id: 300-28-insert-ramona-pizzeria
+      author: marcus
+      comment: Add Ramona pizzeria in Malmö
+      changes:
+        - insert:
+            tableName: pizzerias
+            columns:
+              - column:
+                  name: id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: code
+                  value: "ramonamalmö"
+              - column:
+                  name: name
+                  value: "Ramona"
+              - column:
+                  name: currency
+                  value: "SEK"
+              - column:
+                  name: timezone
+                  value: "Europe/Stockholm"
+              - column:
+                  name: config
+                  valueComputed: "'{\"features\": {\"dietarySuitability\": true, \"pizzaScores\": true, \"emailVerification\": true, \"familySizePricing\": true}}'::jsonb"
+              - column:
+                  name: branding
+                  valueComputed: "'{\"primaryColor\": \"#D32F2F\", \"tagline\": \"Ramona - Malmö\"}'::jsonb"
+              - column:
+                  name: active
+                  valueBoolean: true
+
+  - changeSet:
+      id: 300-29-migrate-menu-to-ramona
+      author: marcus
+      comment: Migrate menu data from default pizzeria to Ramona
+      changes:
+        - update:
+            tableName: menu_sections
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+            where: pizzeria_id = '00000000-0000-0000-0000-000000000001'
+        - update:
+            tableName: menu_items
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+            where: pizzeria_id = '00000000-0000-0000-0000-000000000001'
+        - update:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+            where: pizzeria_id = '00000000-0000-0000-0000-000000000001'
+        - update:
+            tableName: pizza_customisations
+            columns:
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+            where: pizzeria_id = '00000000-0000-0000-0000-000000000001'
+
+  - changeSet:
+      id: 300-30-deactivate-default-pizzeria
+      author: marcus
+      comment: Deactivate default pizzeria (menu migrated to Ramona)
+      changes:
+        - update:
+            tableName: pizzerias
+            columns:
+              - column:
+                  name: active
+                  valueBoolean: false
+            where: id = '00000000-0000-0000-0000-000000000001'
+
+  # =============================================================================
+  # ADD MISSING INGREDIENT FACTS FOR RAMONA
+  # =============================================================================
+  - changeSet:
+      id: 300-31-add-missing-ingredient-facts
+      author: marcus
+      comment: Add missing ingredient facts that cause UNKNOWN dietary type
+      changes:
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000001"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.chili"
+              - column:
+                  name: dietary_type
+                  value: "VEGAN"
+              - column:
+                  name: allergen_tags
+                  value: ""
+              - column:
+                  name: spice_level
+                  valueNumeric: 3
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000002"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.tomato"
+              - column:
+                  name: dietary_type
+                  value: "VEGAN"
+              - column:
+                  name: allergen_tags
+                  value: ""
+              - column:
+                  name: spice_level
+                  valueNumeric: 0
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000003"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.scampi"
+              - column:
+                  name: dietary_type
+                  value: "CARNIVORE"
+              - column:
+                  name: allergen_tags
+                  value: "SHELLFISH"
+              - column:
+                  name: spice_level
+                  valueNumeric: 0
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000004"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.pepperoni_sausage"
+              - column:
+                  name: dietary_type
+                  value: "CARNIVORE"
+              - column:
+                  name: allergen_tags
+                  value: ""
+              - column:
+                  name: spice_level
+                  valueNumeric: 1
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000005"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.fresh_basil"
+              - column:
+                  name: dietary_type
+                  value: "VEGAN"
+              - column:
+                  name: allergen_tags
+                  value: ""
+              - column:
+                  name: spice_level
+                  valueNumeric: 0
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000006"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.cucumber"
+              - column:
+                  name: dietary_type
+                  value: "VEGAN"
+              - column:
+                  name: allergen_tags
+                  value: ""
+              - column:
+                  name: spice_level
+                  valueNumeric: 0
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000007"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.bread"
+              - column:
+                  name: dietary_type
+                  value: "VEGETARIAN"
+              - column:
+                  name: allergen_tags
+                  value: "GLUTEN"
+              - column:
+                  name: spice_level
+                  valueNumeric: 0
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000008"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.broccoli"
+              - column:
+                  name: dietary_type
+                  value: "VEGAN"
+              - column:
+                  name: allergen_tags
+                  value: ""
+              - column:
+                  name: spice_level
+                  valueNumeric: 0
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000009"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.gyros_meat"
+              - column:
+                  name: dietary_type
+                  value: "CARNIVORE"
+              - column:
+                  name: allergen_tags
+                  value: ""
+              - column:
+                  name: spice_level
+                  valueNumeric: 1
+        - insert:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  value: "a1b2c3d4-0001-0001-0001-000000000010"
+              - column:
+                  name: pizzeria_id
+                  value: "00000000-0000-0000-0000-000000000002"
+              - column:
+                  name: ingredient_key
+                  value: "translation.key.ingredient.dry_cured_ham"
+              - column:
+                  name: dietary_type
+                  value: "CARNIVORE"
+              - column:
+                  name: allergen_tags
+                  value: ""
+              - column:
+                  name: spice_level
+                  valueNumeric: 0
+
+  - changeSet:
+      id: 300-32-rename-ramona-code
+      author: claude
+      comment: Change pizzeria code from ramonamalmö to ramonamalmo (ASCII-only)
+      changes:
+        - update:
+            tableName: pizzerias
+            columns:
+              - column:
+                  name: code
+                  value: "ramonamalmo"
+            where: code = 'ramonamalmö'

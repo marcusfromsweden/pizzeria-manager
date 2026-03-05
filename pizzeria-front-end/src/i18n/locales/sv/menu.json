@@ -1,0 +1,246 @@
+{
+  "title": "Vår meny",
+  "subtitle": "Upptäck vårt läckra utbud",
+  "sections": {
+    "pizza": "Pizzor",
+    "salad": "Sallader",
+    "pasta": "Pasta",
+    "dessert": "Efterrätter",
+    "drink": "Drycker"
+  },
+  "item": {
+    "price": "Pris",
+    "familySize": "Familjestorlek",
+    "regularSize": "Vanlig",
+    "ingredients": "Ingredienser",
+    "allergens": "Allergener",
+    "spiceLevel": "Styrka",
+    "dietary": {
+      "VEGAN": "Vegansk",
+      "VEGETARIAN": "Vegetarisk",
+      "CARNIVORE": "Innehåller kött",
+      "UNKNOWN": "Okänd"
+    }
+  },
+  "customisations": {
+    "title": "Tillval",
+    "subtitle": "Lägg till extra till din beställning"
+  },
+  "suitability": {
+    "title": "Kontrollera lämplighet",
+    "subtitle": "Se om denna pizza passar dina kostpreferenser",
+    "check": "Kontrollera",
+    "checking": "Kontrollerar...",
+    "suitable": "Denna pizza passar din kost!",
+    "notSuitable": "Denna pizza kanske inte passar din kost",
+    "violations": "Kostöverträdelser",
+    "suggestions": "Förslag",
+    "addIngredients": "Lägg till ingredienser",
+    "removeIngredients": "Ta bort ingredienser",
+    "loginRequired": "Logga in för att kontrollera kostlämplighet"
+  },
+  "scores": {
+    "title": "Mina pizzabetyg",
+    "subtitle": "Betygsatt dina favoritpizzor",
+    "noScores": "Du har inte betygsatt några pizzor ännu",
+    "addScore": "Lägg till betyg",
+    "pizza": "Pizza",
+    "score": "Betyg",
+    "comment": "Kommentar",
+    "commentPlaceholder": "Dela dina tankar...",
+    "submit": "Skicka betyg",
+    "submitting": "Skickar...",
+    "success": "Betyget skickades",
+    "selectPizza": "Välj en pizza",
+    "pizzaType": {
+      "TEMPLATE": "Menypizza",
+      "CUSTOM": "Egen pizza"
+    }
+  },
+  "feedback": {
+    "title": "Servicefeedback",
+    "subtitle": "Vi vill gärna höra från dig",
+    "message": "Din feedback",
+    "messagePlaceholder": "Berätta om din upplevelse...",
+    "rating": "Betyg (valfritt)",
+    "category": "Kategori (valfritt)",
+    "categoryPlaceholder": "t.ex. Service, Leverans, Kvalitet",
+    "submit": "Skicka feedback",
+    "submitting": "Skickar...",
+    "success": "Tack för din feedback!",
+    "history": "Min feedback",
+    "noFeedback": "Du har inte skickat någon feedback ännu",
+    "adminReply": "Svar från pizzerian",
+    "new": "NY"
+  },
+  "preferences": {
+    "title": "Mina preferenser",
+    "diet": {
+      "title": "Kostpreferens",
+      "subtitle": "Välj din kostpreferens",
+      "current": "Nuvarande preferens",
+      "VEGAN": "Vegansk",
+      "VEGETARIAN": "Vegetarisk",
+      "CARNIVORE": "Köttätare",
+      "NONE": "Ingen preferens",
+      "updateSuccess": "Kostpreferensen uppdaterades"
+    },
+    "ingredients": {
+      "title": "Favoritingredienser",
+      "subtitle": "Välj dina favoritingredienser",
+      "selected": "Dina favoritingredienser",
+      "noPreferences": "Inga favoritingredienser valda",
+      "add": "Lägg till ingrediens",
+      "remove": "Ta bort",
+      "addSuccess": "Ingrediens tillagd i preferenser",
+      "removeSuccess": "Ingrediens borttagen från preferenser"
+    }
+  },
+  "cart": {
+    "title": "Din varukorg",
+    "emptyTitle": "Din varukorg är tom",
+    "emptyMessage": "Lägg till några läckra pizzor i varukorgen!",
+    "browseMenu": "Visa meny",
+    "items": "Varor",
+    "subtotal": "Delsumma",
+    "clearAll": "Rensa allt",
+    "proceedToCheckout": "Gå till kassan",
+    "continueShopping": "Fortsätt handla",
+    "selectSize": "Välj storlek",
+    "sizeRegular": "Vanlig",
+    "sizeFamily": "Familj",
+    "addExtras": "Lägg till tillval",
+    "quantity": "Antal",
+    "specialInstructions": "Särskilda önskemål",
+    "specialInstructionsPlaceholder": "Några särskilda önskemål?",
+    "total": "Totalt",
+    "addToCart": "Lägg i varukorg"
+  },
+  "checkout": {
+    "title": "Kassa",
+    "emptyCart": "Din varukorg är tom",
+    "emptyCartMessage": "Lägg till varor innan du går till kassan",
+    "fulfillmentType": "Hur vill du få din beställning?",
+    "pickup": "Avhämtning",
+    "pickupDescription": "Hämta på restaurangen",
+    "delivery": "Leverans",
+    "deliveryAddress": "Leveransadress",
+    "defaultAddress": "Standard",
+    "useNewAddress": "Använd en annan adress",
+    "useSavedAddress": "Använd en sparad adress",
+    "street": "Gatuadress",
+    "postalCode": "Postnummer",
+    "city": "Ort",
+    "phone": "Telefonnummer",
+    "deliveryInstructions": "Leveransinstruktioner",
+    "deliveryInstructionsPlaceholder": "t.ex. Ring på dörren, lämna vid dörren",
+    "orderNotes": "Orderanteckningar",
+    "orderNotesPlaceholder": "Några särskilda önskemål för din beställning?",
+    "orderSummary": "Ordersammanfattning",
+    "subtotal": "Delsumma",
+    "deliveryFee": "Leveransavgift",
+    "total": "Totalt",
+    "placeOrder": "Lägg beställning",
+    "addressRequired": "Ange en leveransadress",
+    "orderError": "Kunde inte lägga beställning. Försök igen."
+  },
+  "orders": {
+    "title": "Mina beställningar",
+    "noOrdersTitle": "Inga beställningar ännu",
+    "noOrdersMessage": "Gör din första beställning nu!",
+    "startOrdering": "Börja beställa",
+    "activeOrders": "Aktiva beställningar",
+    "pastOrders": "Tidigare beställningar",
+    "loadError": "Kunde inte ladda beställningar",
+    "notFound": "Beställning hittades inte",
+    "backToOrders": "Tillbaka till beställningar",
+    "orderNumber": "Order",
+    "fulfillmentType": "Ordertyp",
+    "placedAt": "Lagd",
+    "deliveryAddress": "Leveransadress",
+    "notes": "Orderanteckningar",
+    "orderItems": "Orderinnehåll",
+    "item": "vara",
+    "items": "varor",
+    "cancelOrder": "Avbryt beställning",
+    "cancelOrderDescription": "Du kan avbryta denna beställning medan den bearbetas",
+    "cancelButton": "Avbryt beställning",
+    "status": {
+      "PENDING": "Väntande",
+      "CONFIRMED": "Bekräftad",
+      "PREPARING": "Tillagas",
+      "READY": "Klar",
+      "OUT_FOR_DELIVERY": "Ute för leverans",
+      "DELIVERED": "Levererad",
+      "PICKED_UP": "Uthämtad",
+      "CANCELLED": "Avbruten"
+    },
+    "fulfillment": {
+      "PICKUP": "Avhämtning",
+      "DELIVERY": "Leverans"
+    }
+  },
+  "translation": {
+    "key": {
+      "section": {
+        "pizza": "Pizzor",
+        "salad": "Sallader",
+        "pasta": "Pasta",
+        "dessert": "Efterrätter",
+        "drink": "Drycker"
+      },
+      "disc": {
+        "pizza": {
+          "margarita": "Margherita",
+          "hawaii": "Hawaii",
+          "pepperoni": "Pepperoni",
+          "quattro_formaggi": "Quattro Formaggi",
+          "vegetariana": "Vegetariana",
+          "calzone": "Calzone",
+          "capricciosa": "Capricciosa",
+          "marinara": "Marinara"
+        }
+      },
+      "description": {
+        "margarita": "Klassisk tomatsås, mozzarella och färsk basilika",
+        "hawaii": "Tomatsås, mozzarella, skinka och ananas",
+        "pepperoni": "Tomatsås, mozzarella och kryddig pepperoni",
+        "quattro_formaggi": "Fyra ostar: mozzarella, gorgonzola, parmesan, fontina",
+        "vegetariana": "Färska grönsaker med tomatsås och mozzarella",
+        "calzone": "Vikt pizza med ricotta, skinka och mozzarella",
+        "capricciosa": "Tomatsås, mozzarella, skinka, svamp, kronartskockor, oliver",
+        "marinara": "Tomatsås, vitlök, oregano, olivolja"
+      },
+      "ingredient": {
+        "cheese": "Ost",
+        "mozzarella": "Mozzarella",
+        "tomato_sauce": "Tomatsås",
+        "basil": "Basilika",
+        "ham": "Skinka",
+        "pineapple": "Ananas",
+        "pepperoni": "Pepperoni",
+        "mushrooms": "Svamp",
+        "olives": "Oliver",
+        "onion": "Lök",
+        "bell_pepper": "Paprika",
+        "garlic": "Vitlök",
+        "oregano": "Oregano",
+        "olive_oil": "Olivolja",
+        "artichokes": "Kronartskockor",
+        "gorgonzola": "Gorgonzola",
+        "parmesan": "Parmesan",
+        "fontina": "Fontina",
+        "ricotta": "Ricotta"
+      },
+      "pizza": {
+        "customisation": {
+          "extra_cheese": "Extra ost",
+          "gluten_free_pizza": "Glutenfri botten",
+          "extra_sauce": "Extra sås",
+          "thin_crust": "Tunn botten",
+          "thick_crust": "Tjock botten"
+        }
+      }
+    }
+  }
+}

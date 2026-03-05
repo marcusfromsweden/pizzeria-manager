@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/db.changelog-100-menu-structure.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-200-menu-data.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-300-multi-tenant.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-400-pizzeria-config.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-500-admin-feature.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-600-feedback-category.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-700-feedback-reply.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-800-feedback-reply-read.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-900-profile-photo.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-1000-ordering.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-1100-audit-fields.yaml

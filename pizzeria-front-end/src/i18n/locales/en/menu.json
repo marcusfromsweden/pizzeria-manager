@@ -1,0 +1,246 @@
+{
+  "title": "Our menu",
+  "subtitle": "Discover our delicious selection",
+  "sections": {
+    "pizza": "Pizzas",
+    "salad": "Salads",
+    "pasta": "Pasta",
+    "dessert": "Desserts",
+    "drink": "Drinks"
+  },
+  "item": {
+    "price": "Price",
+    "familySize": "Family size",
+    "regularSize": "Regular",
+    "ingredients": "Ingredients",
+    "allergens": "Allergens",
+    "spiceLevel": "Spice level",
+    "dietary": {
+      "VEGAN": "Vegan",
+      "VEGETARIAN": "Vegetarian",
+      "CARNIVORE": "Contains meat",
+      "UNKNOWN": "Unknown"
+    }
+  },
+  "customisations": {
+    "title": "Customisations",
+    "subtitle": "Add extras to your order"
+  },
+  "suitability": {
+    "title": "Check suitability",
+    "subtitle": "See if this pizza matches your dietary preferences",
+    "check": "Check suitability",
+    "checking": "Checking...",
+    "suitable": "This pizza is suitable for your diet!",
+    "notSuitable": "This pizza may not be suitable for your diet",
+    "violations": "Dietary violations",
+    "suggestions": "Suggestions",
+    "addIngredients": "Add ingredients",
+    "removeIngredients": "Remove ingredients",
+    "loginRequired": "Please sign in to check dietary suitability"
+  },
+  "scores": {
+    "title": "My pizza ratings",
+    "subtitle": "Rate your favorite pizzas",
+    "noScores": "You haven't rated any pizzas yet",
+    "addScore": "Add rating",
+    "pizza": "Pizza",
+    "score": "Score",
+    "comment": "Comment",
+    "commentPlaceholder": "Share your thoughts...",
+    "submit": "Submit rating",
+    "submitting": "Submitting...",
+    "success": "Rating submitted successfully",
+    "selectPizza": "Select a pizza",
+    "pizzaType": {
+      "TEMPLATE": "Menu pizza",
+      "CUSTOM": "Custom pizza"
+    }
+  },
+  "feedback": {
+    "title": "Service feedback",
+    "subtitle": "We'd love to hear from you",
+    "message": "Your feedback",
+    "messagePlaceholder": "Tell us about your experience...",
+    "rating": "Rating (optional)",
+    "category": "Category (optional)",
+    "categoryPlaceholder": "e.g., Service, Delivery, Quality",
+    "submit": "Send feedback",
+    "submitting": "Sending...",
+    "success": "Thank you for your feedback!",
+    "history": "My feedback",
+    "noFeedback": "You haven't submitted any feedback yet",
+    "adminReply": "Response from pizzeria",
+    "new": "NEW"
+  },
+  "preferences": {
+    "title": "My preferences",
+    "diet": {
+      "title": "Dietary preference",
+      "subtitle": "Select your dietary preference",
+      "current": "Current preference",
+      "VEGAN": "Vegan",
+      "VEGETARIAN": "Vegetarian",
+      "CARNIVORE": "Carnivore",
+      "NONE": "No preference",
+      "updateSuccess": "Dietary preference updated"
+    },
+    "ingredients": {
+      "title": "Preferred ingredients",
+      "subtitle": "Select your favorite ingredients",
+      "selected": "Your favorite ingredients",
+      "noPreferences": "No preferred ingredients selected",
+      "add": "Add ingredient",
+      "remove": "Remove",
+      "addSuccess": "Ingredient added to preferences",
+      "removeSuccess": "Ingredient removed from preferences"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "emptyTitle": "Your cart is empty",
+    "emptyMessage": "Add some delicious pizzas to your cart!",
+    "browseMenu": "Browse Menu",
+    "items": "Items",
+    "subtotal": "Subtotal",
+    "clearAll": "Clear all",
+    "proceedToCheckout": "Proceed to Checkout",
+    "continueShopping": "Continue shopping",
+    "selectSize": "Select size",
+    "sizeRegular": "Regular",
+    "sizeFamily": "Family",
+    "addExtras": "Add extras",
+    "quantity": "Quantity",
+    "specialInstructions": "Special instructions",
+    "specialInstructionsPlaceholder": "Any special requests?",
+    "total": "Total",
+    "addToCart": "Add to Cart"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "emptyCart": "Your cart is empty",
+    "emptyCartMessage": "Add some items before checking out",
+    "fulfillmentType": "How would you like to receive your order?",
+    "pickup": "Pickup",
+    "pickupDescription": "Pick up at the restaurant",
+    "delivery": "Delivery",
+    "deliveryAddress": "Delivery Address",
+    "defaultAddress": "Default",
+    "useNewAddress": "Use a different address",
+    "useSavedAddress": "Use a saved address",
+    "street": "Street address",
+    "postalCode": "Postal code",
+    "city": "City",
+    "phone": "Phone number",
+    "deliveryInstructions": "Delivery instructions",
+    "deliveryInstructionsPlaceholder": "e.g., Ring doorbell, leave at door",
+    "orderNotes": "Order notes",
+    "orderNotesPlaceholder": "Any special requests for your order?",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Delivery fee",
+    "total": "Total",
+    "placeOrder": "Place Order",
+    "addressRequired": "Please enter a delivery address",
+    "orderError": "Failed to place order. Please try again."
+  },
+  "orders": {
+    "title": "My Orders",
+    "noOrdersTitle": "No orders yet",
+    "noOrdersMessage": "Start your first order now!",
+    "startOrdering": "Start Ordering",
+    "activeOrders": "Active Orders",
+    "pastOrders": "Past Orders",
+    "loadError": "Failed to load orders",
+    "notFound": "Order not found",
+    "backToOrders": "Back to orders",
+    "orderNumber": "Order",
+    "fulfillmentType": "Order type",
+    "placedAt": "Placed at",
+    "deliveryAddress": "Delivery address",
+    "notes": "Order notes",
+    "orderItems": "Order Items",
+    "item": "item",
+    "items": "items",
+    "cancelOrder": "Cancel Order",
+    "cancelOrderDescription": "You can cancel this order while it's being processed",
+    "cancelButton": "Cancel Order",
+    "status": {
+      "PENDING": "Pending",
+      "CONFIRMED": "Confirmed",
+      "PREPARING": "Preparing",
+      "READY": "Ready",
+      "OUT_FOR_DELIVERY": "Out for delivery",
+      "DELIVERED": "Delivered",
+      "PICKED_UP": "Picked up",
+      "CANCELLED": "Cancelled"
+    },
+    "fulfillment": {
+      "PICKUP": "Pickup",
+      "DELIVERY": "Delivery"
+    }
+  },
+  "translation": {
+    "key": {
+      "section": {
+        "pizza": "Pizzas",
+        "salad": "Salads",
+        "pasta": "Pasta",
+        "dessert": "Desserts",
+        "drink": "Drinks"
+      },
+      "disc": {
+        "pizza": {
+          "margarita": "Margherita",
+          "hawaii": "Hawaii",
+          "pepperoni": "Pepperoni",
+          "quattro_formaggi": "Quattro Formaggi",
+          "vegetariana": "Vegetariana",
+          "calzone": "Calzone",
+          "capricciosa": "Capricciosa",
+          "marinara": "Marinara"
+        }
+      },
+      "description": {
+        "margarita": "Classic tomato sauce, mozzarella, and fresh basil",
+        "hawaii": "Tomato sauce, mozzarella, ham, and pineapple",
+        "pepperoni": "Tomato sauce, mozzarella, and spicy pepperoni",
+        "quattro_formaggi": "Four cheese blend: mozzarella, gorgonzola, parmesan, fontina",
+        "vegetariana": "Fresh vegetables with tomato sauce and mozzarella",
+        "calzone": "Folded pizza with ricotta, ham, and mozzarella",
+        "capricciosa": "Tomato sauce, mozzarella, ham, mushrooms, artichokes, olives",
+        "marinara": "Tomato sauce, garlic, oregano, olive oil"
+      },
+      "ingredient": {
+        "cheese": "Cheese",
+        "mozzarella": "Mozzarella",
+        "tomato_sauce": "Tomato sauce",
+        "basil": "Basil",
+        "ham": "Ham",
+        "pineapple": "Pineapple",
+        "pepperoni": "Pepperoni",
+        "mushrooms": "Mushrooms",
+        "olives": "Olives",
+        "onion": "Onion",
+        "bell_pepper": "Bell pepper",
+        "garlic": "Garlic",
+        "oregano": "Oregano",
+        "olive_oil": "Olive oil",
+        "artichokes": "Artichokes",
+        "gorgonzola": "Gorgonzola",
+        "parmesan": "Parmesan",
+        "fontina": "Fontina",
+        "ricotta": "Ricotta"
+      },
+      "pizza": {
+        "customisation": {
+          "extra_cheese": "Extra cheese",
+          "gluten_free_pizza": "Gluten-free base",
+          "extra_sauce": "Extra sauce",
+          "thin_crust": "Thin crust",
+          "thick_crust": "Thick crust"
+        }
+      }
+    }
+  }
+}

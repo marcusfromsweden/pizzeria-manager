@@ -1,0 +1,1 @@
+export { AdminPricesPage } from './AdminPricesPage';

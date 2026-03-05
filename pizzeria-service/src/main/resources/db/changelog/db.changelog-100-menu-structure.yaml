@@ -1,0 +1,500 @@
+databaseChangeLog:
+  - changeSet:
+      id: 100-01-create-menu-sections
+      author: codex
+      changes:
+        - createTable:
+            tableName: menu_sections
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: translation_key
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sort_order
+                  type: INTEGER
+                  defaultValueNumeric: 0
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 100-02-create-menu-items
+      author: codex
+      changes:
+        - createTable:
+            tableName: menu_items
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: section_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: dish_number
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name_key
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description_key
+                  type: VARCHAR(255)
+              - column:
+                  name: price_regular
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price_family
+                  type: DECIMAL(10,2)
+              - column:
+                  name: sort_order
+                  type: INTEGER
+                  defaultValueNumeric: 0
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 100-03-create-menu-item-ingredients
+      author: codex
+      changes:
+        - createTable:
+            tableName: menu_item_ingredients
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: menu_item_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ingredient_key
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sort_order
+                  type: INTEGER
+                  defaultValueNumeric: 0
+
+  - changeSet:
+      id: 100-04-create-pizza-customisations
+      author: codex
+      changes:
+        - createTable:
+            tableName: pizza_customisations
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name_key
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price_regular
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price_family
+                  type: DECIMAL(10,2)
+              - column:
+                  name: sort_order
+                  type: INTEGER
+                  defaultValueNumeric: 0
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 100-05-add-menu-constraints
+      author: codex
+      changes:
+        - addUniqueConstraint:
+            tableName: menu_sections
+            columnNames: code
+            constraintName: uq_menu_sections_code
+        - addUniqueConstraint:
+            tableName: menu_items
+            columnNames: dish_number
+            constraintName: uq_menu_items_dish_number
+        - addUniqueConstraint:
+            tableName: menu_items
+            columnNames: section_id, sort_order
+            constraintName: uq_menu_items_section_sort
+
+  - changeSet:
+      id: 100-06-add-menu-foreign-keys
+      author: codex
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: menu_items
+            baseColumnNames: section_id
+            referencedTableName: menu_sections
+            referencedColumnNames: id
+            constraintName: fk_menu_items_section
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: menu_item_ingredients
+            baseColumnNames: menu_item_id
+            referencedTableName: menu_items
+            referencedColumnNames: id
+            constraintName: fk_menu_item_ingredients_item
+            onDelete: CASCADE
+
+  - changeSet:
+      id: 100-07-add-menu-indexes
+      author: codex
+      changes:
+        - createIndex:
+            tableName: menu_sections
+            indexName: idx_menu_sections_sort
+            columns:
+              - column:
+                  name: sort_order
+        - createIndex:
+            tableName: menu_items
+            indexName: idx_menu_items_section
+            columns:
+              - column:
+                  name: section_id
+              - column:
+                  name: sort_order
+        - createIndex:
+            tableName: menu_item_ingredients
+            indexName: idx_menu_item_ingredients_item_sort
+            columns:
+              - column:
+                  name: menu_item_id
+              - column:
+                  name: sort_order
+  - changeSet:
+      id: 100-08-create-menu-ingredient-facts
+      author: codex
+      changes:
+        - createTable:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: ingredient_key
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: dietary_type
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: allergen_tags
+                  type: VARCHAR(255)
+              - column:
+                  name: spice_level
+                  type: INTEGER
+                  defaultValueNumeric: 0
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 100-09-add-ingredient-fact-constraints
+      author: codex
+      changes:
+        - addUniqueConstraint:
+            tableName: menu_ingredient_facts
+            columnNames: ingredient_key
+            constraintName: uq_menu_ingredient_facts_key
+        - createIndex:
+            tableName: menu_ingredient_facts
+            indexName: idx_menu_ingredient_facts_key
+            columns:
+              - column:
+                  name: ingredient_key
+  - changeSet:
+      id: 100-10-create-users
+      author: codex
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password_hash
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email_verified
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+              - column:
+                  name: phone
+                  type: VARCHAR(64)
+              - column:
+                  name: preferred_diet
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addUniqueConstraint:
+            tableName: users
+            columnNames: email
+            constraintName: uq_users_email
+        - createIndex:
+            tableName: users
+            indexName: idx_users_email
+            columns:
+              - column:
+                  name: email
+  - changeSet:
+      id: 100-11-create-user-preferred-ingredients
+      author: codex
+      changes:
+        - createTable:
+            tableName: user_preferred_ingredients
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ingredient_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: user_preferred_ingredients
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_user_preferred_user
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: user_preferred_ingredients
+            baseColumnNames: ingredient_id
+            referencedTableName: menu_ingredient_facts
+            referencedColumnNames: id
+            constraintName: fk_user_preferred_ingredient
+            onDelete: CASCADE
+        - addUniqueConstraint:
+            tableName: user_preferred_ingredients
+            columnNames: user_id, ingredient_id
+            constraintName: uq_user_preferred_unique
+        - createIndex:
+            tableName: user_preferred_ingredients
+            indexName: idx_user_preferred_user
+            columns:
+              - column:
+                  name: user_id
+  - changeSet:
+      id: 100-12-create-feedback
+      author: codex
+      changes:
+        - createTable:
+            tableName: feedback
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+              - column:
+                  name: kind
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: message
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rating
+                  type: INTEGER
+              - column:
+                  name: status
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: feedback
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_feedback_user
+            onDelete: SET NULL
+        - createIndex:
+            tableName: feedback
+            indexName: idx_feedback_user
+            columns:
+              - column:
+                  name: user_id
+  - changeSet:
+      id: 100-13-create-pizza-scores
+      author: codex
+      changes:
+        - createTable:
+            tableName: pizza_scores
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pizza_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pizza_kind
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: score
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comment
+                  type: TEXT
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: pizza_scores
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_pizza_scores_user
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: pizza_scores
+            baseColumnNames: pizza_id
+            referencedTableName: menu_items
+            referencedColumnNames: id
+            constraintName: fk_pizza_scores_menu_item
+            onDelete: CASCADE
+        - createIndex:
+            tableName: pizza_scores
+            indexName: idx_pizza_scores_user
+            columns:
+              - column:
+                  name: user_id

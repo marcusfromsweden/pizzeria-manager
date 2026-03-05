@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 200-01-load-menu-sections
+      author: codex
+      changes:
+        - loadData:
+            file: classpath:db/changelog/data/menu_sections.csv
+            tableName: menu_sections
+            separator: ","
+            quotchar: "\""
+            encoding: UTF-8
+
+  - changeSet:
+      id: 200-02-load-menu-items
+      author: codex
+      changes:
+        - loadData:
+            file: classpath:db/changelog/data/menu_items_v2.csv
+            tableName: menu_items
+            separator: ","
+            quotchar: "\""
+            encoding: UTF-8
+
+  - changeSet:
+      id: 200-03-load-menu-item-ingredients
+      author: codex
+      changes:
+        - loadData:
+            file: classpath:db/changelog/data/menu_item_ingredients.csv
+            tableName: menu_item_ingredients
+            separator: ","
+            quotchar: "\""
+            encoding: UTF-8
+
+  - changeSet:
+      id: 200-04-load-pizza-customisations
+      author: codex
+      changes:
+        - loadData:
+            file: classpath:db/changelog/data/pizza_customisations.csv
+            tableName: pizza_customisations
+            separator: ","
+            quotchar: "\""
+            encoding: UTF-8
+  - changeSet:
+      id: 200-05-load-menu-ingredient-facts
+      author: codex
+      changes:
+        - loadData:
+            file: classpath:db/changelog/data/menu_ingredient_facts.csv
+            tableName: menu_ingredient_facts
+            separator: ","
+            quotchar: "\""
+            encoding: UTF-8
