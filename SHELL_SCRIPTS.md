@@ -40,11 +40,12 @@ pizzeria-service/
 │   └── kill.sh                 # Stop all services
 ├── pizzeria-service/           # Backend (Spring Boot)
 │   └── script/
-│       ├── run.sh              # Start backend
-│       ├── kill.sh             # Stop backend
+│       ├── run.sh              # Start backend + PostgreSQL database
+│       ├── kill.sh             # Stop backend + PostgreSQL database
 │       ├── restart.sh          # Restart backend
-│       ├── status.sh           # Check backend status
-│       └── tail-log.sh         # View backend logs
+│       ├── status.sh           # Check backend + database status
+│       ├── tail-log.sh         # View backend logs
+│       └── reset-db.sh         # Reset PostgreSQL database (removes all data)
 └── pizzeria-front-end/         # Frontend (React + Vite)
     └── script/
         ├── run.sh              # Start frontend
@@ -64,10 +65,13 @@ cd pizzeria-service
 ./script/run.sh
 ```
 
+- Starts PostgreSQL database via `docker-compose up -d`
+- Waits for database to be ready (health check)
 - Starts Spring Boot with `mvn spring-boot:run`
 - Runs in background (detached from terminal)
 - Logs to `backend.log`
 - Default port: **9900** (configurable via `.env`)
+- Database: **PostgreSQL 16** on port **5432**
 
 ### Stop Backend
 ```bash
@@ -76,6 +80,7 @@ cd pizzeria-service
 ```
 
 - Kills all Spring Boot processes for this project
+- Stops PostgreSQL database via `docker-compose down`
 - Uses project-specific pattern to avoid killing other projects
 
 ### Restart Backend
@@ -96,6 +101,7 @@ cd pizzeria-service
 - Shows if backend is running
 - Displays PID, port, and URLs
 - Checks if port is actually listening
+- Shows database status (PostgreSQL container)
 
 ### View Backend Logs
 ```bash
@@ -105,6 +111,17 @@ cd pizzeria-service
 
 - Tails `backend.log` in real-time
 - Press Ctrl+C to stop
+
+### Reset Database
+```bash
+cd pizzeria-service
+./script/reset-db.sh
+```
+
+- ⚠️ **WARNING**: Deletes ALL database data
+- Stops and removes PostgreSQL container with volumes
+- Useful for starting with a fresh database
+- Run `./script/run.sh` after reset to recreate database
 
 ---
 
@@ -192,12 +209,23 @@ cd pizzeria-front-end
 
 ## Configuration
 
-### Backend Port (.env in pizzeria-service/)
+### Backend (.env in pizzeria-service/)
 ```bash
+# Server
 SERVER_PORT=9900
+
+# Database (R2DBC - reactive driver)
+SPRING_R2DBC_URL=r2dbc:postgresql://localhost:5432/pizzeria
+SPRING_R2DBC_USERNAME=pizzeria
+SPRING_R2DBC_PASSWORD=pizzeria
+
+# Database (Liquibase - migrations)
+SPRING_LIQUIBASE_URL=jdbc:postgresql://localhost:5432/pizzeria
+SPRING_LIQUIBASE_USERNAME=pizzeria
+SPRING_LIQUIBASE_PASSWORD=pizzeria
 ```
 
-### Frontend Port (.env in pizzeria-front-end/)
+### Frontend (.env in pizzeria-front-end/)
 ```bash
 VITE_PORT=5173
 # or
@@ -269,9 +297,11 @@ cd pizzeria-front-end
 - Check status with `./script/status.sh`
 
 ### Backend not starting
-- Check if PostgreSQL is running: `docker-compose ps`
-- Start database: `cd pizzeria-service && docker-compose up -d`
-- View logs: `./pizzeria-service/script/tail-log.sh`
+- Check if PostgreSQL is running: `cd pizzeria-service && docker-compose ps`
+- View backend logs: `./pizzeria-service/script/tail-log.sh`
+- Check database logs: `cd pizzeria-service && docker-compose logs postgres`
+- Reset database if corrupted: `./pizzeria-service/script/reset-db.sh`
+- Restart: `./pizzeria-service/script/run.sh`
 
 ### Frontend not starting
 - Check if dependencies are installed: `cd pizzeria-front-end && npm install`
