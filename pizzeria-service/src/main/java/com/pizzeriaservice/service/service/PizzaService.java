@@ -190,7 +190,8 @@ public class PizzaService {
                 ingredientFactRepository
                     .findByIngredientKeyAndPizzeriaId(key, pizzeriaId)
                     .defaultIfEmpty(
-                        new MenuIngredientFactEntity(null, pizzeriaId, key, "UNKNOWN", "", 0)))
+                        new MenuIngredientFactEntity(
+                            null, pizzeriaId, key, "UNKNOWN", "", 0, java.math.BigDecimal.ZERO)))
         .collectMap(MenuIngredientFactEntity::ingredientKey, fact -> fact, LinkedHashMap::new);
   }
 
@@ -214,7 +215,13 @@ public class PizzaService {
                     .findByIngredientKeyAndPizzeriaId(ingredientEntry.ingredientKey(), pizzeriaId)
                     .defaultIfEmpty(
                         new MenuIngredientFactEntity(
-                            null, pizzeriaId, ingredientEntry.ingredientKey(), "UNKNOWN", "", 0))
+                            null,
+                            pizzeriaId,
+                            ingredientEntry.ingredientKey(),
+                            "UNKNOWN",
+                            "",
+                            0,
+                            java.math.BigDecimal.ZERO))
                     .map(
                         fact ->
                             new MenuIngredientResponse(
@@ -222,7 +229,8 @@ public class PizzaService {
                                 ingredientEntry.ingredientKey(),
                                 fact.dietaryType(),
                                 parseAllergens(fact.allergenTags()),
-                                Optional.ofNullable(fact.spiceLevel()).orElse(0))))
+                                Optional.ofNullable(fact.spiceLevel()).orElse(0),
+                                fact.caloriesPer100g())))
         .collectList()
         .map(
             ingredients ->
@@ -233,7 +241,8 @@ public class PizzaService {
                     entity.priceRegular(),
                     entity.priceFamily(),
                     computeOverallDietaryType(ingredients),
-                    Optional.ofNullable(entity.sortOrder()).orElse(0)));
+                    Optional.ofNullable(entity.sortOrder()).orElse(0),
+                    entity.totalCalories()));
   }
 
   private Mono<PizzaDetailResponse> mapToDetailResponse(MenuItemEntity entity, UUID pizzeriaId) {
@@ -245,7 +254,13 @@ public class PizzaService {
                     .findByIngredientKeyAndPizzeriaId(ingredientEntry.ingredientKey(), pizzeriaId)
                     .defaultIfEmpty(
                         new MenuIngredientFactEntity(
-                            null, pizzeriaId, ingredientEntry.ingredientKey(), "UNKNOWN", "", 0))
+                            null,
+                            pizzeriaId,
+                            ingredientEntry.ingredientKey(),
+                            "UNKNOWN",
+                            "",
+                            0,
+                            java.math.BigDecimal.ZERO))
                     .map(
                         fact ->
                             new MenuIngredientResponse(
@@ -253,7 +268,8 @@ public class PizzaService {
                                 ingredientEntry.ingredientKey(),
                                 fact.dietaryType(),
                                 parseAllergens(fact.allergenTags()),
-                                Optional.ofNullable(fact.spiceLevel()).orElse(0))))
+                                Optional.ofNullable(fact.spiceLevel()).orElse(0),
+                                fact.caloriesPer100g())))
         .collectList()
         .map(
             ingredients ->
@@ -266,7 +282,8 @@ public class PizzaService {
                     entity.priceFamily(),
                     ingredients,
                     computeOverallDietaryType(ingredients),
-                    Optional.ofNullable(entity.sortOrder()).orElse(0)));
+                    Optional.ofNullable(entity.sortOrder()).orElse(0),
+                    entity.totalCalories()));
   }
 
   private String computeOverallDietaryType(List<MenuIngredientResponse> ingredients) {

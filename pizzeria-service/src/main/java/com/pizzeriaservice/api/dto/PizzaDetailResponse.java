@@ -13,4 +13,5 @@ public record PizzaDetailResponse(
     BigDecimal familySizePriceInSek,
     List<MenuIngredientResponse> ingredients,
     String overallDietaryType,
-    int sortOrder) {}
+    int sortOrder,
+    BigDecimal totalCalories) {}

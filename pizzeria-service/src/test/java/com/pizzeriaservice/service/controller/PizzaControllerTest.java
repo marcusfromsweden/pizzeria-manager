@@ -59,7 +59,8 @@ class PizzaControllerTest {
             BigDecimal.valueOf(165),
             List.of(),
             "VEGETARIAN",
-            1);
+            1,
+            BigDecimal.ZERO);
     MenuItemResponse pizzaItem2 =
         new MenuItemResponse(
             pizzaId2,
@@ -71,7 +72,8 @@ class PizzaControllerTest {
             BigDecimal.valueOf(175),
             List.of(),
             "CARNIVORE",
-            2);
+            2,
+            BigDecimal.ZERO);
     MenuItemResponse saladItem =
         new MenuItemResponse(
             saladId,
@@ -83,7 +85,8 @@ class PizzaControllerTest {
             null,
             List.of(),
             "VEGAN",
-            1);
+            1,
+            BigDecimal.ZERO);
 
     MenuSectionResponse pizzaSection =
         new MenuSectionResponse(
@@ -142,7 +145,8 @@ class PizzaControllerTest {
             BigDecimal.valueOf(165),
             List.of(),
             "VEGETARIAN",
-            1);
+            1,
+            BigDecimal.ZERO);
 
     when(pizzeriaService.resolvePizzeriaId(PIZZERIA_CODE))
         .thenReturn(Mono.just(DEFAULT_PIZZERIA_ID));

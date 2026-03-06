@@ -17,5 +17,6 @@ public record MenuItemEntity(
     @Column("price_regular") java.math.BigDecimal priceRegular,
     @Column("price_family") java.math.BigDecimal priceFamily,
     @Column("sort_order") Integer sortOrder,
+    @Column("total_calories") java.math.BigDecimal totalCalories,
     @Column("created_at") Instant createdAt,
     @Column("updated_at") Instant updatedAt) {}

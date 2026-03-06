@@ -43,6 +43,7 @@ class OrderValidatorTest {
             new BigDecimal("99.00"),
             new BigDecimal("149.00"),
             1,
+            BigDecimal.ZERO,
             NOW,
             NOW);
 
@@ -103,6 +104,7 @@ class OrderValidatorTest {
             new BigDecimal("99.00"),
             null,
             1,
+            BigDecimal.ZERO,
             NOW,
             NOW);
 
@@ -136,6 +138,7 @@ class OrderValidatorTest {
             new BigDecimal("99.00"),
             new BigDecimal("149.00"),
             1,
+            BigDecimal.ZERO,
             NOW,
             NOW);
 
@@ -171,6 +174,7 @@ class OrderValidatorTest {
             new BigDecimal("99.00"),
             new BigDecimal("149.00"),
             1,
+            BigDecimal.ZERO,
             NOW,
             NOW);
 
@@ -213,6 +217,7 @@ class OrderValidatorTest {
             new BigDecimal("109.00"),
             null,
             2,
+            BigDecimal.ZERO,
             NOW,
             NOW);
 
@@ -265,6 +270,7 @@ class OrderValidatorTest {
             new BigDecimal("99.00"),
             new BigDecimal("149.00"),
             1,
+            BigDecimal.ZERO,
             NOW,
             NOW);
 

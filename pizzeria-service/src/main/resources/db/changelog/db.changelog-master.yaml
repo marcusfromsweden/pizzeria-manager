@@ -21,3 +21,7 @@ databaseChangeLog:
       file: classpath:db/changelog/db.changelog-1000-ordering.yaml
   - include:
       file: classpath:db/changelog/db.changelog-1100-audit-fields.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-1200-calorie-data.yaml
+  - include:
+      file: classpath:db/changelog/db.changelog-1210-calorie-data-load.yaml

@@ -59,7 +59,8 @@ public class PizzaController {
                                     item.priceInSek(),
                                     item.familySizePriceInSek(),
                                     item.overallDietaryType(),
-                                    item.sortOrder()))
+                                    item.sortOrder(),
+                                    item.totalCalories()))
                         .toList()));
   }
 

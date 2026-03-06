@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1210-01-load-ingredient-calories
+      author: claude
+      changes:
+        - loadUpdateData:
+            file: classpath:db/changelog/data/ingredient-calories.csv
+            tableName: menu_ingredient_facts
+            primaryKey: ingredient_key
+            columns:
+              - column:
+                  name: ingredient_key
+                  type: STRING
+              - column:
+                  name: calories_per_100g
+                  type: NUMERIC
+            onlyUpdate: true
+            quotchar: "\""
+            separator: ","
+      rollback:
+        - sql:
+            sql: UPDATE menu_ingredient_facts SET calories_per_100g = 0
+      comment: "Load calorie data for existing ingredients (update only, doesn't create new ingredients)"
+
+  - changeSet:
+      id: 1210-02-calculate-initial-pizza-calories
+      author: claude
+      comment: "Calculate initial calorie values for all pizzas based on their ingredients. This is a rough estimate assuming 100g per ingredient. Production systems should use actual portion weights."
+      changes:
+        - sql:
+            sql: >
+              UPDATE menu_items mi
+              SET total_calories = COALESCE((
+                SELECT SUM(mif.calories_per_100g)
+                FROM menu_item_ingredients mii
+                JOIN menu_ingredient_facts mif ON mii.ingredient_key = mif.ingredient_key
+                WHERE mii.menu_item_id = mi.id
+              ), 0)
+              WHERE mi.total_calories = 0
+      rollback:
+        - sql:
+            sql: UPDATE menu_items SET total_calories = 0

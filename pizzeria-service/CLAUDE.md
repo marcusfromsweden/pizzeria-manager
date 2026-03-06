@@ -492,6 +492,7 @@ implemented, ⚠️ are partially implemented, and ❌ are not yet started.
 | Realtidsstatus (öppet/stängt/snart stänger) | ❌      | -     |
 | Chatbot / AI-orderhjälp                     | ❌      | -     |
 | Rekommendationer baserat på tidigare köp    | ❌      | -     |
+| Rekommendationer på låg-kalori pizzor       | ❌      | Requires calorie data in DB, recommendation algorithm, API endpoint, UI |
 | Cross-sell / upsell (dryck, tillbehör)      | ❌      | -     |
 | Push-notiser (via PWA)                      | ❌      | -     |
 

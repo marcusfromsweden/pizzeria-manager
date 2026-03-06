@@ -12,4 +12,5 @@ public record MenuIngredientFactEntity(
     @Column("ingredient_key") String ingredientKey,
     @Column("dietary_type") String dietaryType,
     @Column("allergen_tags") String allergenTags,
-    @Column("spice_level") Integer spiceLevel) {}
+    @Column("spice_level") Integer spiceLevel,
+    @Column("calories_per_100g") java.math.BigDecimal caloriesPer100g) {}

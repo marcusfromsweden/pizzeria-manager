@@ -73,7 +73,13 @@ public class MenuService {
                     .findByIngredientKeyAndPizzeriaId(entry.ingredientKey(), pizzeriaId)
                     .defaultIfEmpty(
                         new MenuIngredientFactEntity(
-                            null, null, entry.ingredientKey(), "UNKNOWN", "", 0))
+                            null,
+                            null,
+                            entry.ingredientKey(),
+                            "UNKNOWN",
+                            "",
+                            0,
+                            java.math.BigDecimal.ZERO))
                     .map(
                         fact ->
                             new MenuIngredientResponse(
@@ -81,7 +87,8 @@ public class MenuService {
                                 entry.ingredientKey(),
                                 fact.dietaryType(),
                                 parseAllergens(fact.allergenTags()),
-                                fact.spiceLevel() != null ? fact.spiceLevel() : 0)))
+                                fact.spiceLevel() != null ? fact.spiceLevel() : 0,
+                                fact.caloriesPer100g())))
         .collectList()
         .map(ingredients -> toMenuItemResponse(item, ingredients));
   }
@@ -98,7 +105,8 @@ public class MenuService {
         item.priceFamily(),
         ingredients,
         computeOverallDietaryType(ingredients),
-        item.sortOrder() != null ? item.sortOrder() : 0);
+        item.sortOrder() != null ? item.sortOrder() : 0,
+        item.totalCalories());
   }
 
   private String computeOverallDietaryType(List<MenuIngredientResponse> ingredients) {

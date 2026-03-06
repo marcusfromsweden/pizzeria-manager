@@ -1,0 +1,84 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1200-01-add-calories-to-ingredient-facts
+      author: claude
+      changes:
+        - addColumn:
+            tableName: menu_ingredient_facts
+            columns:
+              - column:
+                  name: calories_per_100g
+                  type: DECIMAL(6,2)
+                  remarks: "Calories per 100 grams of ingredient"
+        - addNotNullConstraint:
+            tableName: menu_ingredient_facts
+            columnName: calories_per_100g
+            defaultNullValue: 0
+            columnDataType: DECIMAL(6,2)
+      rollback:
+        - dropColumn:
+            tableName: menu_ingredient_facts
+            columnName: calories_per_100g
+
+  - changeSet:
+      id: 1200-02-add-calories-to-menu-items
+      author: claude
+      changes:
+        - addColumn:
+            tableName: menu_items
+            columns:
+              - column:
+                  name: total_calories
+                  type: DECIMAL(8,2)
+                  remarks: "Total calories for the entire dish (calculated from ingredients)"
+        - sql:
+            comment: "Set initial values to 0 for existing items"
+            sql: UPDATE menu_items SET total_calories = 0 WHERE total_calories IS NULL
+        - addNotNullConstraint:
+            tableName: menu_items
+            columnName: total_calories
+            columnDataType: DECIMAL(8,2)
+      rollback:
+        - dropColumn:
+            tableName: menu_items
+            columnName: total_calories
+
+  - changeSet:
+      id: 1200-03-add-calorie-index
+      author: claude
+      changes:
+        - createIndex:
+            tableName: menu_items
+            indexName: idx_menu_items_calories
+            columns:
+              - column:
+                  name: total_calories
+      rollback:
+        - dropIndex:
+            tableName: menu_items
+            indexName: idx_menu_items_calories
+
+  - changeSet:
+      id: 1200-04-add-calorie-constraints
+      author: claude
+      changes:
+        - sql:
+            comment: "Add check constraints for reasonable calorie values"
+            sql: >
+              ALTER TABLE menu_ingredient_facts
+              ADD CONSTRAINT chk_calories_per_100g_positive
+              CHECK (calories_per_100g >= 0 AND calories_per_100g <= 9000);
+        - sql:
+            sql: >
+              ALTER TABLE menu_items
+              ADD CONSTRAINT chk_total_calories_positive
+              CHECK (total_calories >= 0 AND total_calories <= 999999);
+      rollback:
+        - sql:
+            sql: >
+              ALTER TABLE menu_ingredient_facts
+              DROP CONSTRAINT IF EXISTS chk_calories_per_100g_positive;
+        - sql:
+            sql: >
+              ALTER TABLE menu_items
+              DROP CONSTRAINT IF EXISTS chk_total_calories_positive;

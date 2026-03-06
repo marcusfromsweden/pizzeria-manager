@@ -87,6 +87,7 @@ class PizzaServiceTest {
             new BigDecimal("120.00"),
             new BigDecimal("280.00"),
             1,
+            BigDecimal.ZERO,
             Instant.parse("2024-01-01T00:00:00Z"),
             Instant.parse("2024-01-01T00:00:00Z"));
 
@@ -111,7 +112,8 @@ class PizzaServiceTest {
                     "translation.key.ingredient.cheese",
                     "VEGETARIAN",
                     "DAIRY",
-                    0)));
+                    0,
+                    BigDecimal.ZERO)));
 
     when(ingredientFactRepository.findByIngredientKeyAndPizzeriaId(
             "translation.key.ingredient.pepperoni", DEFAULT_PIZZERIA_ID))
@@ -123,7 +125,8 @@ class PizzaServiceTest {
                     "translation.key.ingredient.pepperoni",
                     "CARNIVORE",
                     "",
-                    0)));
+                    0,
+                    BigDecimal.ZERO)));
 
     when(userRepository.findByIdAndPizzeriaId(userId, DEFAULT_PIZZERIA_ID))
         .thenReturn(
@@ -156,7 +159,8 @@ class PizzaServiceTest {
                               "translation.key.ingredient.pepperoni",
                               "CARNIVORE",
                               "",
-                              0));
+                              0,
+                              BigDecimal.ZERO));
                     } else if (cheeseFactId.equals(id)) {
                       facts.add(
                           new MenuIngredientFactEntity(
@@ -165,7 +169,8 @@ class PizzaServiceTest {
                               "translation.key.ingredient.cheese",
                               "VEGETARIAN",
                               "DAIRY",
-                              0));
+                              0,
+                              BigDecimal.ZERO));
                     }
                   });
               return Flux.fromIterable(facts);
@@ -259,6 +264,7 @@ class PizzaServiceTest {
             new BigDecimal("100.00"),
             new BigDecimal("200.00"),
             1,
+            BigDecimal.ZERO,
             Instant.parse("2024-01-01T00:00:00Z"),
             Instant.parse("2024-01-01T00:00:00Z"));
 
@@ -288,6 +294,7 @@ class PizzaServiceTest {
             new BigDecimal("100.00"),
             new BigDecimal("200.00"),
             1,
+            BigDecimal.ZERO,
             Instant.parse("2024-01-01T00:00:00Z"),
             Instant.parse("2024-01-01T00:00:00Z"));
 
@@ -366,6 +373,7 @@ class PizzaServiceTest {
             new BigDecimal("100.00"),
             new BigDecimal("200.00"),
             1,
+            BigDecimal.ZERO,
             Instant.parse("2024-01-01T00:00:00Z"),
             Instant.parse("2024-01-01T00:00:00Z"));
 
@@ -380,6 +388,7 @@ class PizzaServiceTest {
             new BigDecimal("110.00"),
             new BigDecimal("220.00"),
             2,
+            BigDecimal.ZERO,
             Instant.parse("2024-01-01T00:00:00Z"),
             Instant.parse("2024-01-01T00:00:00Z"));
 
@@ -474,6 +483,7 @@ class PizzaServiceTest {
             new BigDecimal("100.00"),
             new BigDecimal("200.00"),
             1,
+            BigDecimal.ZERO,
             Instant.parse("2024-01-01T00:00:00Z"),
             Instant.parse("2024-01-01T00:00:00Z"));
 
@@ -498,7 +508,8 @@ class PizzaServiceTest {
                     "translation.key.ingredient.tomato",
                     "VEGAN",
                     "",
-                    0)));
+                    0,
+                    BigDecimal.ZERO)));
 
     // Preferred ingredient lookup is also scoped to pizzeria
     when(ingredientFactRepository.findAllByIdInAndPizzeriaId(

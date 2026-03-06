@@ -75,6 +75,7 @@ class MenuServiceTest {
             new BigDecimal("100.00"),
             new BigDecimal("250.00"),
             1,
+            BigDecimal.ZERO,
             Instant.parse("2024-01-01T00:00:00Z"),
             Instant.parse("2024-01-01T00:00:00Z"));
 
@@ -98,7 +99,8 @@ class MenuServiceTest {
                     "translation.key.ingredient.cheese",
                     "VEGETARIAN",
                     "DAIRY",
-                    0)));
+                    0,
+                    BigDecimal.ZERO)));
     when(customisationRepository.findAllByPizzeriaIdOrderBySortOrderAsc(DEFAULT_PIZZERIA_ID))
         .thenReturn(Flux.empty());
 
@@ -144,6 +146,7 @@ class MenuServiceTest {
             new BigDecimal("100.00"),
             new BigDecimal("250.00"),
             1,
+            BigDecimal.ZERO,
             Instant.parse("2024-01-01T00:00:00Z"),
             Instant.parse("2024-01-01T00:00:00Z"));
 

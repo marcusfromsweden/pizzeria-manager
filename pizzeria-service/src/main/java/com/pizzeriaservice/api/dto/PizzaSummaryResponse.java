@@ -10,4 +10,5 @@ public record PizzaSummaryResponse(
     BigDecimal priceInSek,
     BigDecimal familySizePriceInSek,
     String overallDietaryType,
-    int sortOrder) {}
+    int sortOrder,
+    BigDecimal totalCalories) {}

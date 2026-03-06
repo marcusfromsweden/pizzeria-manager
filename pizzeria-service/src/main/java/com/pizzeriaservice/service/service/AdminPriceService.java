@@ -222,6 +222,7 @@ public class AdminPriceService {
                       row.priceRegular(),
                       row.priceFamily(),
                       item.sortOrder(),
+                      item.totalCalories(),
                       item.createdAt(),
                       timeProvider.now());
 
